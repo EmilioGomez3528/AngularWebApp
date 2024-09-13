@@ -92,7 +92,6 @@ namespace Angular1.Server.Data
 
                             };
                         }
- 
                 }   }
             }
             return user;
