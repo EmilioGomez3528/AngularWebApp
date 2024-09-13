@@ -16,12 +16,19 @@ namespace Angular1.Server.Controllers
         {
             _userData = userData;
         }
-
+        /*
         [HttpGet]
         public async Task<IActionResult> List()
         {
            List<User> List = await _userData.List();
             return StatusCode(StatusCodes.Status200OK,List);
+        }*/
+
+        [HttpGet ("{username}, {password}")]
+        public async Task<IActionResult> Get(string username, string password)
+        {
+            User thing = await _userData.Get(username, password);
+            return StatusCode(StatusCodes.Status200OK, thing);
         }
     }
 }
