@@ -17,33 +17,6 @@ namespace Angular1.Server.Data
         }
 
         //METODOS DE PROCEDIMIENTOS ALMACENADOS
-
-        //PROCEDIMIENTO ALMACENADO PARA LISTAR LOS USUARIOS
-        /*
-        public async Task<List<User>> List()
-        {
-            List<User> list = new List<User>();
-            using (var con = new SqlConnection(conection))
-            {
-                await con.OpenAsync();
-                SqlCommand cmd = new SqlCommand("dbo.GetUserDetails", con);
-                //cmd.Parameters.AddWithValue("@UserId", Id);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        list.Add(new User
-                        {
-                            Id = Convert.ToInt32(reader["Id"])
-                        });
-                    }
-                }
-            }
-            return list;
-        }
-        */
         
         //DECLARACION DE PARAMETROS PARA EL STOREDPROCEDURE
         public async Task<User?> Get(string username, string password)
@@ -76,8 +49,12 @@ namespace Angular1.Server.Data
                     
                     int userId = (int)UserIdParam.Value;
 
+                    if (userId == 0) {
+                        return null;
+                    }
                     
-                    SqlCommand userDetailsCmd = new SqlCommand("SELECT U.Username, M.Password FROM Users U JOIN Membership M ON U.Id = M.UserId WHERE U.Id = @UserId", con);
+                    SqlCommand userDetailsCmd = new SqlCommand("dbo.GetDetails", con);
+                    userDetailsCmd.CommandType = CommandType.StoredProcedure;
                     userDetailsCmd.Parameters.AddWithValue("@UserId", userId);
 
                     using (var reader = await userDetailsCmd.ExecuteReaderAsync())
@@ -87,13 +64,16 @@ namespace Angular1.Server.Data
                             user = new User
                             {
                                 UserId = userId,
-                                Username = reader["Username"] != DBNull.Value ? reader["Username"].ToString() : string.Empty,
-                                Password = reader["Password"] != DBNull.Value ? reader["Password"].ToString() : string.Empty
-
+                                Username = username,
+                                Password = password,
+                                FirstName = reader["FirstName"] != DBNull.Value ? reader["FirstName"].ToString() : string.Empty,
+                                LastName = reader["LastName"] != DBNull.Value ? reader["lastName"].ToString() : string.Empty,
+                                Email = reader["Email"] != DBNull.Value ? reader["Email"].ToString() : string.Empty
                             };
                         }
                 }   }
             }
+            
             return user;
         }
     }
