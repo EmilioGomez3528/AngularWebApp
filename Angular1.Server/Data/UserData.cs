@@ -54,8 +54,9 @@ namespace Angular1.Server.Data
                     }
                     
                     SqlCommand userDetailsCmd = new SqlCommand("dbo.GetDetails", con);
-                    userDetailsCmd.CommandType = CommandType.StoredProcedure;
                     userDetailsCmd.Parameters.AddWithValue("@UserId", userId);
+                    userDetailsCmd.CommandType = CommandType.StoredProcedure;
+
 
                     using (var reader = await userDetailsCmd.ExecuteReaderAsync())
                     {

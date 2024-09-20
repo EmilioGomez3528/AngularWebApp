@@ -3,6 +3,17 @@ using Angular1.Server.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:4200") // o "*" para permitir cualquier origen
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -14,6 +25,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<UserData>();
 
 var app = builder.Build();
+
+
+app.UseCors("AllowSpecificOrigin");
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
