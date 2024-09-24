@@ -37,9 +37,33 @@ namespace Angular1.Server.Controllers
             
             return Ok(user);
         }
+
+
+        [HttpGet("GetUsers")]
+        public async Task<IActionResult> GetDetails()
+        {
+            try
+            {
+                var details = await _userData.GetDetails();
+
+                if (details == null || details.Count == 0)
+                {
+                    return NotFound("No se encontraron detalles.");
+                }
+
+                return Ok(details);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
+        }
     }
 
-    
+   
+
+
+
     public class LoginRequest
     {
         public string Username { get; set; }
