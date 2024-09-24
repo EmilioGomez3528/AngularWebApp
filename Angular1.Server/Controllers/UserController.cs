@@ -60,9 +60,6 @@ namespace Angular1.Server.Controllers
         }
     }
 
-   
-
-
 
     public class LoginRequest
     {
