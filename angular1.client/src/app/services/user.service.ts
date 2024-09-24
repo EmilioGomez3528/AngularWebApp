@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserDetails } from '../models/user-details.model';
+
 
 
 @Injectable({
@@ -15,5 +17,9 @@ export class UserService {
   login(username: string, password: string): Observable<any> {
     const loginData = { username, password };  
     return this.http.post(`${this.apiUrl}/login`, loginData); 
+  }
+
+  getDetails(): Observable<UserDetails[]> {
+    return this.http.get<UserDetails[]>(`${this.apiUrl}/GetUsers`);
   }
 }
