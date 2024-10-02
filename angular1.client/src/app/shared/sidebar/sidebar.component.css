@@ -1,0 +1,19 @@
+.app-sidebar {
+    width: 250px;
+    transition: width 0.3s ease;
+  }
+  
+  .app-sidebar.collapsed {
+    width: 0; /* O ajusta este valor según tu diseño */
+    overflow: hidden; /* Evita que se vea el contenido cuando está colapsado */
+  }
+  
+  .sidebar-toggle {
+    padding: 10px;
+    text-align: right;
+  }
+  
+  .sidebar-brand, .sidebar-wrapper {
+    padding: 15px;
+  }
+  

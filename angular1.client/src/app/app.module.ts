@@ -15,6 +15,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort'; 
 import {MatCardModule} from '@angular/material/card';
+import { RolesModalComponent } from './shared/roles-modal/roles-modal.component';
+import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,14 @@ import {MatCardModule} from '@angular/material/card';
     HeaderComponent,
     DashboardComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    RolesModalComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule, FormsModule,
     MatTableModule, MatPaginatorModule,
-    MatSortModule, MatCardModule
+    MatSortModule, MatCardModule, MatDialogContent, MatDialogActions
   ],
   providers: [
     provideAnimationsAsync()

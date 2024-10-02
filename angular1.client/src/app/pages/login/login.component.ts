@@ -22,9 +22,8 @@ export class LoginComponent {
   onSubmit() {
     this.userService.login(this.username, this.password).subscribe(
       (response) => {
-        console.log('Login exitoso', response);
-        const userID = response.userId; //Obtiene el valor de ID del objeto
-        this.authService.setLoginStatus(userID); 
+        // const userID = response.userId; //Obtiene el valor de ID del objeto
+        this.authService.setLoginStatus(response); 
         this.router.navigate (['/', 'dashboard']);//Redirige a dashboard si los datos son correctos
       },
       (error) => {
@@ -33,5 +32,4 @@ export class LoginComponent {
       }
     );
   }
-
 }

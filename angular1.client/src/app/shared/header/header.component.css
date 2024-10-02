@@ -1,0 +1,15 @@
+.app-sidebar {
+    transition: transform 0.3s ease;
+    /* Otras propiedades de estilo */
+  }
+  
+  .app-sidebar.open {
+    transform: translateX(0);
+    /* Ajustes para mostrar el sidebar */
+  }
+  
+  .app-sidebar.closed {
+    transform: translateX(-100%);
+    /* Ajustes para ocultar el sidebar */
+  }
+  

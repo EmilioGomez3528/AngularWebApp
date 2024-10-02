@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Organizaciones y Roles</h2>
+<mat-dialog-content>
+  <div *ngFor="let item of data">
+    <h3>Organización: {{ item.organizationName }}</h3>
+    <p>Rol(es): {{ item.roles }}</p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Cerrar</button>
+</mat-dialog-actions>

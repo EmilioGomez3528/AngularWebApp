@@ -9,17 +9,21 @@ export class AuthServiceService {
 
   
   isLoggedIn(): boolean {
-    const userId = sessionStorage.getItem('userId');
-    return userId !== null; 
+    const user = this.getUser();
+
+    if (user) {
+      return user.userId !== null;
+    }
+      return false
   }
 
-  
-  setLoginStatus(userId: string): void {
-    sessionStorage.setItem('userId', userId); 
+  setLoginStatus(user: any): void {
+    user = JSON.stringify(user);
+    sessionStorage.setItem('userId', user);
   }
 
-  
-  getUserId(): string | null {
-    return sessionStorage.getItem('userId');
+  getUser(): any | null {
+    var _user = sessionStorage.getItem('userId') || "" ;
+    return JSON.parse(_user);
   }
 }

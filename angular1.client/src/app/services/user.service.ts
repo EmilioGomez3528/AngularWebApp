@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserDetails } from '../models/user-details.model';
 
@@ -21,5 +21,10 @@ export class UserService {
 
   getDetails(): Observable<UserDetails[]> {
     return this.http.get<UserDetails[]>(`${this.apiUrl}/GetUsers`);
+  }
+
+  getUserRolesAndOrganizations(userId: number): Observable<any> {
+    // const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiUrl}/GetRO`, { userId }); 
   }
 }
