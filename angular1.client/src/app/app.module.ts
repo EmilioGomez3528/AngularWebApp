@@ -17,6 +17,8 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatCardModule} from '@angular/material/card';
 import { RolesModalComponent } from './shared/roles-modal/roles-modal.component';
 import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatOption, MatSelect } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
     BrowserModule, HttpClientModule,
     AppRoutingModule, FormsModule,
     MatTableModule, MatPaginatorModule,
-    MatSortModule, MatCardModule, MatDialogContent, MatDialogActions
+    MatSortModule, MatCardModule, MatDialogContent, MatDialogActions,
+    MatFormField, MatSelect, MatLabel, MatOption
   ],
   providers: [
     provideAnimationsAsync()

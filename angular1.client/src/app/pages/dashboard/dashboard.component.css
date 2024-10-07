@@ -46,3 +46,79 @@
 .setting-btn:hover .bar2::before {
   transform: translateX(-4px);
 }
+
+
+.dashboard-card {
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.action-button {
+  width: 150px;
+}
+
+.select-field {
+  width: 200px;
+}
+
+.datatable-container {
+  max-height: 400px;
+  overflow: auto;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+/* ACTION-BUTTON CSS */
+
+/* From Uiverse.io by CristianMontoya98 */ 
+.action-button {
+  width: 6.5em;
+  height: 3em;
+  margin: 0.5em;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.action-button:hover {
+  color: black;
+}
+
+.action-button:after {
+  content: "";
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+.action-button:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
