@@ -16,25 +16,25 @@ namespace Angular1.Server.Controllers
             _userData = userData;
         }
 
-        
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            
-            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Username) || string.IsNullOrEmpty(loginRequest.Password))
+
+            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Username) /*|| string.IsNullOrEmpty(loginRequest.Password)*/)
             {
                 return BadRequest("Username o password no pueden estar vacíos");
             }
 
-            
-            User user = await _userData.Get(loginRequest.Username, loginRequest.Password);
+
+            User user = await _userData.Get(loginRequest.Username);//, loginRequest.Password);
 
             if (user == null)
             {
                 return Unauthorized("Credenciales inválidas");
             }
 
-            
+
             return Ok(user);
         }
 
@@ -58,12 +58,103 @@ namespace Angular1.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
             }
         }
+
+        [HttpPost("GetRO")]
+        public async Task<IActionResult> GetRODetails([FromBody] UserRequest request)
+        {
+            try
+            {
+                var userOR = await _userData.GetRODetails(request.userId.ToString());
+                if (userOR == null || userOR.Count == 0)
+                {
+                    return NotFound("No se encontraron datos del usuario especificado");
+                }
+                return Ok(userOR);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error del servidor: {ex.Message}");
+            }
+        }
+
+        [HttpPost("GetUsersByOrganization")]
+        public async Task<IActionResult> GetUsersByOrganization([FromBody] OrganizationRequest request)
+        {
+            try
+            {
+                var detailsOrg = await _userData.GetUsersByOrganization(request.organizationId.ToString());
+
+                if (detailsOrg == null || detailsOrg.Count == 0)
+                {
+                    return NotFound("No se encontraron detalles.");
+                }
+
+                return Ok(detailsOrg);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("GetOrganizations")]
+        public async Task<IActionResult> GetOrganizations()
+        {
+            try
+            {
+                var orgs = await _userData.GetOrganizations();
+
+                if (orgs == null || orgs.Count == 0)
+                {
+                    return NotFound("No se encontraron organizaciones.");
+                }
+
+                return Ok(orgs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
+        }
+
+
+        [HttpGet("GetOrphanUsers")]
+        public async Task<IActionResult> GetOrphanUsers()
+        {
+            try
+            {
+                var details = await _userData.GetOrphanUsers();
+
+                if (details == null || details.Count == 0)
+                {
+                    return NotFound("No se encontraron usuarios.");
+                }
+
+                return Ok(details);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
+        }
+
+
     }
 
 
     public class LoginRequest
     {
         public string Username { get; set; }
-        public string Password { get; set; }
+        //public string Password { get; set; }
+    }
+
+    public class UserRequest
+    {
+        public int userId { get; set; }
+    }
+
+    public class OrganizationRequest
+    {
+        public int organizationId { get; set; }
     }
 }
