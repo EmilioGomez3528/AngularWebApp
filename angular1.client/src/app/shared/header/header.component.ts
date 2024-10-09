@@ -30,5 +30,17 @@ export class HeaderComponent {
     this.router.navigate(['/login']);
   }
 
+  profile(){
+    this.router.navigate(['/profile']);
+  }
+
+  orphanUsers() {
+    this.router.navigate(['/orphanUsers']);
+  }
+
+  users(){
+    this.router.navigate(['/dashboard'])
+  }
+
 
 }

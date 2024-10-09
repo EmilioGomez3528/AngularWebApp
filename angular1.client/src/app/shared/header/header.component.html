@@ -10,10 +10,10 @@
         </a>
       </li>
       <li class="nav-item d-none d-md-block">
-        <a href="javascript:void(0)" class="nav-link">Usuarios con organizacion</a>
+        <a href="javascript:void(0)" class="nav-link">Usuarios</a>
       </li>
       <li class="nav-item d-none d-md-block">
-        <a href="javascript:void(0)" class="nav-link">Usuarios Huerfanos</a>
+        <a (click)="profile()" href="javascript:void(0)" class="nav-link">Perfil</a>
       </li>
     </ul>
     <!-- End navbar links -->
@@ -27,7 +27,7 @@
 
       <li class="nav-item dropdown user-menu">
         <a
-          href="#"
+          href="javascript:void(0)"
           class="nav-link dropdown-toggle"
           data-bs-toggle="dropdown"
         >
@@ -53,7 +53,7 @@
           </li>
           <!-- Menu Footer-->
           <li class="user-footer">
-            <a href="javascript:void(0)" class="btn btn-default btn-flat">Profile</a>
+            <a (click)="profile()" href="javascript:void(0)" class="btn btn-default btn-flat">Profile</a>
             <a (click)="signOut()" class="btn btn-default btn-flat float-end">Cerrar Sesion</a>
           </li>
         </ul>
@@ -66,23 +66,23 @@
 
 <!-- inicio sidebar -->
 <aside
-class="app-sidebar bg-body-secondary shadow"
-data-bs-theme="dark"
-[ngClass]="{ open: sidebarOpen, closed: !sidebarOpen }"
+  class="app-sidebar bg-body-secondary shadow"
+  data-bs-theme="dark"
+  [ngClass]="{ open: sidebarOpen, closed: !sidebarOpen }"
 >
 <!--begin::Sidebar Brand-->
 <div class="sidebar-brand">
   <!--begin::Brand Link-->
-  <a href="./index.html" class="brand-link">
+  <a href="javascript:void(0)" class="brand-link">
     <!--begin::Brand Image-->
     <img
       src="./assets/img/AdminLTELogo.png"
-      alt="AdminLTE Logo"
+      alt="Skillify Logo"
       class="brand-image opacity-75 shadow"
     />
     <!--end::Brand Image-->
     <!--begin::Brand Text-->
-    <span class="brand-text fw-light">AdminLTE 4</span>
+    <span class="brand-text fw-light">Skillify</span>
     <!--end::Brand Text-->
   </a>
   <!--end::Brand Link-->
@@ -98,23 +98,25 @@ data-bs-theme="dark"
       role="menu"
       data-accordion="false"
     >
-      <li class="nav-header">Nav Header</li>
-      <li class="nav-item">
-        <a href="./index.html" class="nav-link">
+      <li class="nav-header">Navegación</li>
+      <li (click)="users()" class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">
           <i class="nav-icon bi bi-circle-fill"></i>
-          <p>Level 1</p>
+          <p>Usuarios con organización</p>
         </a>
       </li>
-      <li class="nav-item menu-open">
+
+      <li (click)="orphanUsers()" class="nav-item menu-open">
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="./index.html" class="nav-link">
+            <a href="javascript:void(0)" class="nav-link">
               <i class="nav-icon bi bi-circle"></i>
-              <p>Level 2</p>
+              <p>Orphan Users</p>
             </a>
           </li>
         </ul>
       </li>
+
     </ul>
     <!--end::Sidebar Menu-->
   </nav>

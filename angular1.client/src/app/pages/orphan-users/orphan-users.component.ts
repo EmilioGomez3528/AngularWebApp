@@ -1,39 +1,35 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { UserDetails } from '../../models/user-details.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../services/user.service';
-import { UserDetails } from '../../models/user-details.model';
-import { RolesModalComponent } from '../../shared/roles-modal/roles-modal.component';
-import { Organizations } from '../../models/organizations.model';
-import Swal from 'sweetalert2'
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-
-
+import Swal from 'sweetalert2'
+import { RolesModalComponent } from '../../shared/roles-modal/roles-modal.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  selector: 'app-orphan-users',
+  templateUrl: './orphan-users.component.html',
+  styleUrl: './orphan-users.component.css'
 })
-export class DashboardComponent implements OnInit {
+export class OrphanUsersComponent implements OnInit{
 
-  displayedColumns: string[] = ["UserId", "FirstName","LastName", "Email", "CreatedDate", "Details"]
+  displayedColumns: string[] = ["UserId","FirstName","LastName","Email", "CreatedDate","Details"]
   dataSource!: MatTableDataSource<UserDetails>;
-  organizationList!: Organizations[];
   usersList: MatTableDataSource<any> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private userService: UserService, private dialog: MatDialog, private route: Router) { }
+  constructor(private userService: UserService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
-      this.showOrganization();
-      this.showUsersByOrganization(1);
+      this.showOrphanUsers();
   }
-  // Filtro para la tabla
+
+  //Filtro de la tabla
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.usersList.filter = filterValue.trim().toLowerCase();
@@ -43,21 +39,19 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  //Método para obtener Roles y Organizaciones de un usuario
   viewUserRoles(userId: number): void {
-    
-    if (!userId) {
-      console.error("El userId es nulo o indefinido");
+
+    if (!userId){
+      console.error("El id del usuario es nulo o indefinido");
       return;
     }
-    
+
     this.userService.getUserRolesAndOrganizations(userId).subscribe(
       (data) => {
         this.openRolesModal(data);
       },
       (error) => {
         console.error('Error al obtener roles y organizaciones', error);
-        // Inicio Alerta
         const swalWithBootstrapButtons = Swal.mixin({
           customClass: {
             confirmButton: "btn btn-success",
@@ -75,7 +69,7 @@ export class DashboardComponent implements OnInit {
           reverseButtons: true
         }).then((result) => {
           if (result.isConfirmed) {
-            this.route.navigate (['/', 'userDetails']);
+            this.router.navigate (['/', 'userDetails', userId]);
           } else if (
             result.dismiss === Swal.DismissReason.cancel
           ) {
@@ -86,9 +80,8 @@ export class DashboardComponent implements OnInit {
             });
           }
         });
-        // Fin de alerta
       }
-    );
+    )
   }
 
   //Método para mostrar modal de Roles y Organizaciones a las que pertenece un usuario
@@ -99,18 +92,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  //Metodo para cargar las organizaciones en el select
-  showOrganization(): void {
-    this.userService.getOrganizations().subscribe(
-      (orgs: Organizations[]) => {
-        this.organizationList = orgs;
-      },
-    );
-  }
-
-  // Método para cargar los usuarios según la organización seleccionada
-  showUsersByOrganization(organizationId: number): void {
-    this.userService.getUsersByOrganization(organizationId).subscribe(
+  //Metodo para cargar los usuarios huerfanos
+  showOrphanUsers(){
+    this.userService.getWithoutOrganization().subscribe(
       (users: any[]) => {
         this.usersList = new MatTableDataSource(users);
         this.usersList.paginator = this.paginator;
@@ -119,7 +103,6 @@ export class DashboardComponent implements OnInit {
       (error: any) => {
         console.error("Error al obtener usuarios", error);
       }
-    );
+    )
   }
-
 }

@@ -3,11 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { OrphanUsersComponent } from './pages/orphan-users/orphan-users.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
 
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent},
+  { path: 'orphanUsers', component: OrphanUsersComponent},
+  { path: 'userDetails/:id', component: UserDetailsComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];
 

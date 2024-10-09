@@ -19,6 +19,9 @@ import { RolesModalComponent } from './shared/roles-modal/roles-modal.component'
 import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { OrphanUsersComponent } from './pages/orphan-users/orphan-users.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { MatOption, MatSelect } from '@angular/material/select';
     DashboardComponent,
     FooterComponent,
     SidebarComponent,
-    RolesModalComponent
+    RolesModalComponent,
+    ProfileComponent,
+    OrphanUsersComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
