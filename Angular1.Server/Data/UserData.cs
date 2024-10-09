@@ -119,7 +119,6 @@ namespace Angular1.Server.Data
             }
             return detailsList;
         }
-
         //METODO 3 DE PROCEDIMIENTOS ALMACENADOS
 
         //METODO DE OBTENCION PARA EL STOREDPROCEDURE DE ROLES Y ORGANIZACIONES DE USUARIOS
@@ -157,7 +156,6 @@ namespace Angular1.Server.Data
             }
             return ROList;
         }
-
         //METODO 4 DE PROCEDIMIENTOS ALMACENADOS
 
         //METODO DE OBTENCION DE USUARIOS POR ORGANIZACION
@@ -216,8 +214,6 @@ namespace Angular1.Server.Data
                     // Ejecutar el comando
                     using (SqlDataReader reader = await command.ExecuteReaderAsync())
                     {
-
-
                         // Leer los datos devueltos por el stored procedure
                         while (await reader.ReadAsync())
                         {
@@ -234,7 +230,6 @@ namespace Angular1.Server.Data
             }
             return organizationList;
         }
-
 
         //METODO 6 DE PROCEDIMIENTOS ALMACENADOS
 
@@ -258,8 +253,6 @@ namespace Angular1.Server.Data
                     // Ejecutar el comando
                     using (SqlDataReader reader = await command.ExecuteReaderAsync())
                     {
-
-
                         // Leer los datos devueltos por el stored procedure
                         while (await reader.ReadAsync())
                         {
@@ -279,9 +272,5 @@ namespace Angular1.Server.Data
             }
             return orphanList;
         }
-
-
-
-
     }
 }
