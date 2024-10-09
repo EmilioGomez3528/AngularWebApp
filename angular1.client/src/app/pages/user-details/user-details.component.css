@@ -1,0 +1,35 @@
+
+.section-title {
+    font-family: 'Aileron', sans-serif; /* Aplicar Aileron Bold */
+    font-size: 28px; /* Tamaño más grande para el título */
+    font-weight: bold; /* Negrita para el título */
+    margin-bottom: 15px; /* Espacio debajo del título */
+    margin-top: 15px;
+}
+
+
+.organization-list {
+    margin: 20px; /* Espacio alrededor de la lista */
+    text-align: left; /* Alinear el texto a la izquierda */
+}
+
+.organization-container {
+    margin-bottom: 20px; /* Espacio entre organizaciones */
+}
+
+.organization-name {
+    font-family: 'Aileron', sans-serif; /* Aplicar Aileron Bold */
+    font-size: 20px; /* Tamaño de fuente para el nombre de la organización */
+    font-weight: bold; /* Negrita para el nombre de la organización */
+    margin: 0; /* Elimina el margen */
+}
+
+.roles {
+    margin-top: 5px; /* Espacio arriba de los roles */
+}
+
+.role-item {
+    font-family: 'Poppins', sans-serif; /* Aplicar Poppins normal */
+    font-size: 16px; /* Tamaño de fuente para los roles */
+    margin: 2px 0; /* Espacio entre los roles */
+}

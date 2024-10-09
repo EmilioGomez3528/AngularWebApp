@@ -1,4 +1,29 @@
+<mat-sidenav-container class="example-container" hasBackdrop *ngIf="showHeaderSidebar">
+    <!-- Sidebar -->
+    <mat-sidenav #sidenav mode="side" opened="false" style="width: 250px;">
+        <mat-nav-list>
+                <mat-list-item>
+                    <a mat-list-item routerLink="/dashboard">Dashboard</a>
+            </mat-list-item>
 
+            <mat-list-item>
+                <a mat-list-item routerLink="/orphanUsers">Orphan Users</a>
+            </mat-list-item>
 
-<router-outlet></router-outlet>
+            <mat-list-item>
+                <a mat-list-item routerLink="/profile">Profile</a>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
 
+    <!-- Main content -->
+    <mat-sidenav-content>
+        <!-- Header -->
+        <app-header (toggleSidebarEvent)="toggleSidebar()"></app-header>
+        <!-- Router outlet for other components like Dashboard -->  
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- Si no es la ruta de login, mostramos el sidenav y el header -->
+  <router-outlet *ngIf="!showHeaderSidebar"></router-outlet>

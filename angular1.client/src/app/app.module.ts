@@ -22,6 +22,10 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { OrphanUsersComponent } from './pages/orphan-users/orphan-users.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -40,8 +44,11 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
     BrowserModule, HttpClientModule,
     AppRoutingModule, FormsModule,
     MatTableModule, MatPaginatorModule,
-    MatSortModule, MatCardModule, MatDialogContent, MatDialogActions,
-    MatFormField, MatSelect, MatLabel, MatOption
+    MatSortModule, MatCardModule,
+    MatDialogContent, MatDialogActions,
+    MatFormField, MatSelect, MatLabel, MatOption,
+    MatSidenavModule,MatToolbarModule,MatButtonModule,
+    MatListModule
   ],
   providers: [
     provideAnimationsAsync()

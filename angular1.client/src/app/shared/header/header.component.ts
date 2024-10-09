@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
 
+  @ViewChild('sidenav') sidenav!: MatSidenav;
   userData: any;
 
   constructor(private authService: AuthServiceService, private router: Router) {
@@ -16,12 +18,10 @@ export class HeaderComponent {
     this.userData = authService.getUser();
   }
 
-  @Output() sidebarToggled = new EventEmitter<void>();
-
-  sidebarOpen: boolean = false;
+  @Output() toggleSidebarEvent = new EventEmitter<void>();
 
   toggleSidebar() {
-      this.sidebarOpen = !this.sidebarOpen;
+    this.toggleSidebarEvent.emit(); // Emitimos el evento hacia el componente padre
   }
 
   signOut() {
