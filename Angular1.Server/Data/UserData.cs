@@ -272,5 +272,39 @@ namespace Angular1.Server.Data
             }
             return orphanList;
         }
+
+        //Metodo 7 DE PROCEDIMIENTOS ALMACENADOS
+
+        //METODO DE INSERCION DE USUARIOS HUERFANOS A ORGANIZACION
+
+        public async Task<bool> AddOrphanUserToOrganization(int userId, int organizationId)
+        {
+            using (var con = new SqlConnection(conection))
+            {
+                //Abrir conexion a base de datos
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("gkan.Emilio_AddOrphanUserToOrganization", con))
+                {
+                    //Definicion de tipo SP
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    //Definicion de parametros
+                    cmd.Parameters.Add(new SqlParameter("@UserId", userId));
+                    cmd.Parameters.Add(new SqlParameter("@OrganizationId", organizationId));
+
+                    try 
+                    {
+                        //Ejecucion de procedimiento almacenado
+                        int rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+                        return true;
+
+                    }catch(Exception e) 
+                    {
+                        throw new Exception("Error al insertar un usuario a la organizacion" + e.Message);
+                    }
+                }
+            }
+        }
     }
 }

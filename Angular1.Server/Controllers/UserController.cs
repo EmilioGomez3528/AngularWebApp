@@ -138,6 +138,26 @@ namespace Angular1.Server.Controllers
             }
         }
 
+        [HttpPost("AddOrphanUser")]
+        public async Task<IActionResult> AddOrphanUserToOrganization([FromBody] AddUserToOrganizationRequest request)
+        {
+            try
+            {
+                bool result = await _userData.AddOrphanUserToOrganization(request.UserId, request.OrganizationId);
+
+                if (result)
+                {
+                    return Ok(new { Message = "Usuario agregado correctamente" });
+                }
+                else 
+                {
+                    return BadRequest(new { Message = "No se pudo agregar al usuario" });
+                }
+            }catch  (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
+        }
 
     }
 
@@ -156,5 +176,11 @@ namespace Angular1.Server.Controllers
     public class OrganizationRequest
     {
         public int organizationId { get; set; }
+    }
+
+    public class AddUserToOrganizationRequest
+    {
+        public int UserId { get; set; }
+        public int OrganizationId { get; set; }
     }
 }
