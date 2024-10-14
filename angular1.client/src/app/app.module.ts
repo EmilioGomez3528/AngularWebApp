@@ -24,8 +24,10 @@ import { OrphanUsersComponent } from './pages/orphan-users/orphan-users.componen
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatListModule } from '@angular/material/list';
+import { MatButtonModule, MatIconAnchor, MatIconButton } from '@angular/material/button';
+import { MatListItemIcon, MatListModule } from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import { AddUsersComponent } from './pages/add-users/add-users.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { MatListModule } from '@angular/material/list';
     RolesModalComponent,
     ProfileComponent,
     OrphanUsersComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    AddUsersComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -48,7 +51,7 @@ import { MatListModule } from '@angular/material/list';
     MatDialogContent, MatDialogActions,
     MatFormField, MatSelect, MatLabel, MatOption,
     MatSidenavModule,MatToolbarModule,MatButtonModule,
-    MatListModule
+    MatListModule, MatListItemIcon, MatIconAnchor, MatIconButton, MatIconModule
   ],
   providers: [
     provideAnimationsAsync()

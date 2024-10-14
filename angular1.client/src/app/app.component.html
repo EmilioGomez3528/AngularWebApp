@@ -1,29 +1,40 @@
 <mat-sidenav-container class="example-container" hasBackdrop *ngIf="showHeaderSidebar">
     <!-- Sidebar -->
     <mat-sidenav #sidenav mode="side" opened="false" style="width: 250px;">
-        <mat-nav-list>
-                <mat-list-item>
-                    <a mat-list-item routerLink="/dashboard">Dashboard</a>
-            </mat-list-item>
-
-            <mat-list-item>
-                <a mat-list-item routerLink="/orphanUsers">Orphan Users</a>
-            </mat-list-item>
-
-            <mat-list-item>
-                <a mat-list-item routerLink="/profile">Profile</a>
-            </mat-list-item>
-        </mat-nav-list>
+      <div class="sidenav-title">Skillify</div>
+      <mat-nav-list>
+        <mat-list-item class="sidenav-item">
+          <a mat-list-item routerLink="/dashboard">
+            <mat-icon class="sidenav-icon">dashboard</mat-icon>
+            Dashboard
+          </a>
+        </mat-list-item>
+  
+        <mat-list-item class="sidenav-item">
+          <a mat-list-item routerLink="/orphanUsers">
+            <mat-icon class="sidenav-icon">people</mat-icon>
+            Orphan Users
+          </a>
+        </mat-list-item>
+  
+        <mat-list-item class="sidenav-item">
+          <a mat-list-item routerLink="/profile">
+            <mat-icon class="sidenav-icon">person</mat-icon>
+            Profile
+          </a>
+        </mat-list-item>
+      </mat-nav-list>
     </mat-sidenav>
-
+  
     <!-- Main content -->
     <mat-sidenav-content>
-        <!-- Header -->
-        <app-header (toggleSidebarEvent)="toggleSidebar()"></app-header>
-        <!-- Router outlet for other components like Dashboard -->  
-        <router-outlet></router-outlet>
+      <!-- Header -->
+      <app-header (toggleSidebarEvent)="toggleSidebar()"></app-header>
+      <!-- Router outlet for other components like Dashboard -->
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
-</mat-sidenav-container>
-
-<!-- Si no es la ruta de login, mostramos el sidenav y el header -->
+  </mat-sidenav-container>
+  
+  <!-- If it is not the login route, we show the sidenav and header -->
   <router-outlet *ngIf="!showHeaderSidebar"></router-outlet>
+  

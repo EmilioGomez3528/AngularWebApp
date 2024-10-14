@@ -1,10 +1,18 @@
 <h4 class="section-title">Organizaciones y Roles</h4>
 
+<a routerLink="/dashboard" class="back-button">
+    <mat-icon>arrow_back</mat-icon> Back
+</a>
+
+
 <div class="organization-list">
     <div *ngFor="let item of userData" class="organization-container">
         <h3 class="organization-name">{{ item.organizationName }}</h3>
         <div class="roles">
-            <p class="role-item">Rol(es): {{ item.roles }}</p>
+            <p class="role-item">Rol(es):</p>
+            <ul>
+                <li *ngFor="let role of item.roles.split(',')">{{ role.trim() }}</li>
+            </ul>
         </div>
     </div>
 </div>

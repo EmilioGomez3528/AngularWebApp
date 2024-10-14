@@ -1,35 +1,85 @@
-
 .section-title {
-    font-family: 'Aileron', sans-serif; /* Aplicar Aileron Bold */
-    font-size: 28px; /* Tamaño más grande para el título */
-    font-weight: bold; /* Negrita para el título */
-    margin-bottom: 15px; /* Espacio debajo del título */
-    margin-top: 15px;
+    font-family: 'Aileron', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0; /* Espacio vertical uniforme */
+    border-bottom: 2px solid #e0e0e0; /* Línea sutil debajo del título */
+    padding-bottom: 30px; /* Espacio debajo del texto */
 }
 
-
 .organization-list {
-    margin: 20px; /* Espacio alrededor de la lista */
-    text-align: left; /* Alinear el texto a la izquierda */
+    margin: 0 20px; /* Espacio lateral */
+    text-align: left;
 }
 
 .organization-container {
+    background-color: #f9f9f9; /* Color de fondo sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     margin-bottom: 20px; /* Espacio entre organizaciones */
+    transition: transform 0.2s; /* Transición suave para efecto hover */
+}
+
+.organization-container:hover {
+    transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
 }
 
 .organization-name {
-    font-family: 'Aileron', sans-serif; /* Aplicar Aileron Bold */
-    font-size: 20px; /* Tamaño de fuente para el nombre de la organización */
-    font-weight: bold; /* Negrita para el nombre de la organización */
-    margin: 0; /* Elimina el margen */
+    font-family: 'Aileron', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0; 
 }
 
 .roles {
-    margin-top: 5px; /* Espacio arriba de los roles */
+    margin-top: 10px; /* Espacio arriba de los roles */
 }
 
 .role-item {
-    font-family: 'Poppins', sans-serif; /* Aplicar Poppins normal */
+    font-family: 'Poppins', sans-serif; /* Aplicar Poppins */
     font-size: 16px; /* Tamaño de fuente para los roles */
     margin: 2px 0; /* Espacio entre los roles */
+    color: #333; /* Color de texto (opcional, puedes ajustar) */
 }
+
+
+ul {
+    list-style-type: none; /* Eliminar viñetas de la lista */
+    padding: 0; /* Eliminar espaciado por defecto */
+}
+
+li {
+    background-color: #ffffff; /* Fondo blanco para cada rol */
+    border: 1px solid #e0e0e0; /* Borde sutil */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 8px; /* Espaciado interno */
+    margin-top: 5px; /* Espacio entre los roles */
+    transition: background-color 0.2s; /* Transición suave para efecto hover */
+}
+
+li:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
+}
+
+
+.back-button {
+    position: absolute; /* Mantener la posición absoluta */
+    left: 20px; /* Distancia desde el lado izquierdo */
+    top: 70px; /* Aumentar el espacio desde la parte superior */
+    display: flex; /* Permitir alinear el icono y el texto */
+    align-items: center; /* Centrar verticalmente el texto */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: #f44336; /* Fondo rojo */
+    color: white; /* Color del texto blanco */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Eliminar subrayado */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.back-button:hover {
+    background-color: #d32f2f; /* Color más oscuro al pasar el mouse */
+}
+
+

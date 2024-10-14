@@ -41,4 +41,9 @@ export class UserService {
   getWithoutOrganization(): Observable<UserDetails[]> {
     return this.http.get<UserDetails[]>(`${this.apiUrl}/GetOrphanUsers`);
   }
+
+  //metodo para agregar usuario huerfano a una organizacion
+  addOrphanUserToOrg(userId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/AddOrphanUser`, { userId });
+  }
 }

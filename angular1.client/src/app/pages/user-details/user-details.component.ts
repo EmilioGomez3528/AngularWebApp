@@ -22,7 +22,7 @@ export class UserDetailsComponent {
       this.userData = response
     },
       (error) => {
-        console.log('Error')
+        console.log('Error');
       }
     )
   }
