@@ -1,0 +1,18 @@
+.back-button {
+    position: absolute; /* Mantener la posición absoluta */
+    left: 20px; /* Distancia desde el lado izquierdo */
+    top: 70px; /* Aumentar el espacio desde la parte superior */
+    display: flex; /* Permitir alinear el icono y el texto */
+    align-items: center; /* Centrar verticalmente el texto */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: #f44336; /* Fondo rojo */
+    color: white; /* Color del texto blanco */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Eliminar subrayado */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.back-button:hover {
+    background-color: #d32f2f; /* Color más oscuro al pasar el mouse */
+}

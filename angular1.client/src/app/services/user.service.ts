@@ -43,7 +43,8 @@ export class UserService {
   }
 
   //metodo para agregar usuario huerfano a una organizacion
-  addOrphanUserToOrg(userId: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/AddOrphanUser`, { userId });
+  addOrphanUserToOrg(userId: number, organizationId: number): Observable<any> {
+    const userData = { userId, organizationId }
+    return this.http.post<any>(`${this.apiUrl}/AddOrphanUser`, userData);
   }
 }

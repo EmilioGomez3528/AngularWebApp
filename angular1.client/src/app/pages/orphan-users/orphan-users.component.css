@@ -1,3 +1,12 @@
+.section-title {
+    font-family: 'Aileron', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0; /* Espacio vertical uniforme */
+    border-bottom: 2px solid #e0e0e0; /* Línea sutil debajo del título */
+    padding-bottom: 30px; /* Espacio debajo del texto */
+}
+
 /* From Uiverse.io by vinodjangid07 */
 .setting-btn {
     width: 45px;
@@ -70,7 +79,7 @@
 
 .datatable-container {
     max-height: 400px;
-    overflow: auto;
+    overflow:visible;
     border-radius: 20px;
     border: 1px solid #ccc;
     padding: 10px;

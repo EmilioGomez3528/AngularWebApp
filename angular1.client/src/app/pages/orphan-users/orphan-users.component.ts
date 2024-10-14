@@ -69,7 +69,7 @@ export class OrphanUsersComponent implements OnInit{
           reverseButtons: true
         }).then((result) => {
           if (result.isConfirmed) {
-            this.router.navigate (['/', 'userDetails', userId]);
+            this.router.navigate (['/', 'addUsers', userId]);
           } else if (
             result.dismiss === Swal.DismissReason.cancel
           ) {
