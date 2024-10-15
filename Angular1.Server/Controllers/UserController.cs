@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Angular1.Server.Data;
 using Angular1.Server.Models;
+using System.Diagnostics;
 
 namespace Angular1.Server.Controllers
 {
@@ -21,13 +22,13 @@ namespace Angular1.Server.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
 
-            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Username) /*|| string.IsNullOrEmpty(loginRequest.Password)*/)
+            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Username) || string.IsNullOrEmpty(loginRequest.Password))
             {
                 return BadRequest("Username o password no pueden estar vacíos");
             }
 
 
-            User user = await _userData.Get(loginRequest.Username);//, loginRequest.Password);
+            User user = await _userData.Get(loginRequest.Username) /*, loginRequest.Password)*/;
 
             if (user == null)
             {
@@ -35,7 +36,23 @@ namespace Angular1.Server.Controllers
             }
 
 
-            return Ok(user);
+            var passwordEncrypted = Hash.ComputeSaltedHash(loginRequest.Password, user.PasswordSalt);
+            if (passwordEncrypted.Equals(user.Password))
+            {
+                //Acceso
+                return Ok(user);
+            }
+            else
+            {
+                Console.WriteLine("The password = " + passwordEncrypted);
+                //disparar alerta, usuario incorrecto
+                return Unauthorized("Los password no corresponden");
+                
+            }
+
+
+
+            
         }
 
 
@@ -165,7 +182,7 @@ namespace Angular1.Server.Controllers
     public class LoginRequest
     {
         public string Username { get; set; }
-        //public string Password { get; set; }
+        public string Password { get; set; }
     }
 
     public class UserRequest

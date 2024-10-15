@@ -20,7 +20,7 @@ namespace Angular1.Server.Data
         //METODO 1 DE PROCEDIMIENTOS ALMACENADOS
 
         //DECLARACION DE PARAMETROS PARA EL STOREDPROCEDURE DE LOGIN
-        public async Task<User?> Get(string username)//, string password)
+        public async Task<User?> Get(string username/*, string password*/)
         {
             User? user = null;
 
@@ -65,10 +65,11 @@ namespace Angular1.Server.Data
                             {
                                 UserId = userId,
                                 Username = username,
-                                //Password = password,
+                                Password = reader["Password"] != DBNull.Value ? reader["Password"].ToString() : string.Empty,
                                 FirstName = reader["FirstName"] != DBNull.Value ? reader["FirstName"].ToString() : string.Empty,
                                 LastName = reader["LastName"] != DBNull.Value ? reader["lastName"].ToString() : string.Empty,
-                                Email = reader["Email"] != DBNull.Value ? reader["Email"].ToString() : string.Empty
+                                Email = reader["Email"] != DBNull.Value ? reader["Email"].ToString() : string.Empty,
+                                PasswordSalt = reader["PasswordSalt"] != DBNull.Value ? reader["PasswordSalt"].ToString() : string.Empty
                             };
                         }
                     }
