@@ -12,4 +12,11 @@
     transform: translateX(-100%);
     /* Ajustes para ocultar el sidebar */
   }
+
+  .header-title {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+  }
   

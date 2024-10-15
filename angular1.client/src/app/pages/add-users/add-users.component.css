@@ -16,3 +16,12 @@
 .back-button:hover {
     background-color: #d32f2f; /* Color más oscuro al pasar el mouse */
 }
+
+.section-title {
+    font-family: 'Aileron', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0; /* Espacio vertical uniforme */
+    border-bottom: 2px solid #e0e0e0; /* Línea sutil debajo del título */
+    padding-bottom: 30px; /* Espacio debajo del texto */
+}
