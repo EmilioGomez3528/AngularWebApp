@@ -28,6 +28,7 @@ import { MatButtonModule, MatIconAnchor, MatIconButton } from '@angular/material
 import { MatListItemIcon, MatListModule } from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import { AddUsersComponent } from './pages/add-users/add-users.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AddUsersComponent } from './pages/add-users/add-users.component';
     MatDialogContent, MatDialogActions,
     MatFormField, MatSelect, MatLabel, MatOption,
     MatSidenavModule,MatToolbarModule,MatButtonModule,
-    MatListModule, MatListItemIcon, MatIconAnchor, MatIconButton, MatIconModule
+    MatListModule, MatListItemIcon, MatIconAnchor, MatIconButton, MatIconModule,
+    OAuthModule.forRoot()
   ],
   providers: [
     provideAnimationsAsync()

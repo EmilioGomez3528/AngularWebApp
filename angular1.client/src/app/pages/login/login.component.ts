@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 import Swal from 'sweetalert2'
+import { AuthGoogleService } from '../../services/auth-google.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string | null = null;
 
-  constructor (private userService: UserService, private authService: AuthServiceService , private router: Router) {}
+  constructor (private userService: UserService, private authService: AuthServiceService , private router: Router, private oauthGoogle: AuthGoogleService) {}
 
 
   //metodo que se llama al presionar el boton
@@ -54,5 +55,9 @@ export class LoginComponent {
         });
       }
     );
+  }
+
+  loginWithGoogle() {
+    this.oauthGoogle.autenticateWithGoogle();
   }
 }
