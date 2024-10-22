@@ -23,6 +23,8 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "@azure/msal-angular": "^3.0.25",
+    "@azure/msal-browser": "^3.26.1",
     "angular-oauth2-oidc": "^17.0.2",
     "jest-editor-support": "*",
     "run-script-os": "*",
