@@ -17,9 +17,13 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   errorMessage: string | null = null;
+  name?: string;
+  preferredUsername?: string;
+  providerId?: string;
 
   constructor (private userService: UserService, private authService: AuthServiceService , private router: Router, private msalService: MsalService) { 
     msalService.initialize().subscribe(result => { console.log(result)  })
+    
   }
 
 
@@ -62,6 +66,7 @@ export class LoginComponent {
 
 
   loginWithMicrosoft() {
+    sessionStorage.removeItem('msal.interaction.status');
     this.msalService.loginPopup().subscribe( (response: AuthenticationResult) => {
       this.msalService.instance.setActiveAccount(response.account)
     });
@@ -70,12 +75,43 @@ export class LoginComponent {
   
   isLoggedIn() : boolean {
     return this.msalService.instance.getActiveAccount() != null
+    
   }
 
   logoutWithMicrosoft() {
     this.msalService.logout();
+    
   }
 
+
+  getUserInfo() {
+    this.msalService.loginPopup({
+      scopes: ['user.read'] 
+    }).subscribe({
+      next: (response: any) => {
+        const claims = response.idTokenClaims;
+  
+        if (claims) {
+          this.name = claims.name;
+          this.preferredUsername = claims.preferred_username;
+          this.providerId = claims.sub;
+  
+          console.log("Nombre:", this.name);
+          console.log("Correo:", this.preferredUsername);
+          console.log("Sub:", this.providerId);
+        }
+  
+        if (response && response.account) {
+          this.username = response.account.username;
+          console.log("Nombre de usuario:", this.username);
+        }
+      },
+      error: (err) => {
+        console.error('Error al iniciar sesión', err);
+      }
+    });
+  }
+  
 
 
 }
