@@ -3,6 +3,8 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 import Swal from 'sweetalert2'
+import { MsalService } from '@azure/msal-angular';
+import { AuthenticationResult } from '@azure/msal-browser';
 
 
 @Component({
@@ -16,7 +18,9 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string | null = null;
 
-  constructor (private userService: UserService, private authService: AuthServiceService , private router: Router) {}
+  constructor (private userService: UserService, private authService: AuthServiceService , private router: Router, private msalService: MsalService) { 
+    msalService.initialize().subscribe(result => { console.log(result)  })
+  }
 
 
   //metodo que se llama al presionar el boton
@@ -55,4 +59,23 @@ export class LoginComponent {
       }
     );
   }
+
+
+  loginWithMicrosoft() {
+    this.msalService.loginPopup().subscribe( (response: AuthenticationResult) => {
+      this.msalService.instance.setActiveAccount(response.account)
+    });
+  }
+
+  
+  isLoggedIn() : boolean {
+    return this.msalService.instance.getActiveAccount() != null
+  }
+
+  logoutWithMicrosoft() {
+    this.msalService.logout();
+  }
+
+
+
 }

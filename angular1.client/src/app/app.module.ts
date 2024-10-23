@@ -28,6 +28,18 @@ import { MatButtonModule, MatIconAnchor, MatIconButton } from '@angular/material
 import { MatListItemIcon, MatListModule } from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import { AddUsersComponent } from './pages/add-users/add-users.component';
+import { MSAL_INSTANCE, MsalModule, MsalService } from '@azure/msal-angular';
+import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
+
+
+export function MSALInstanceFactory(): IPublicClientApplication{
+  return new PublicClientApplication({
+    auth: {
+      clientId: '17fa375e-fb92-4056-b5d1-2248e7353814',
+      redirectUri: 'https://localhost:4200'
+    }
+  })
+}
 
 @NgModule({
   declarations: [
@@ -51,9 +63,15 @@ import { AddUsersComponent } from './pages/add-users/add-users.component';
     MatDialogContent, MatDialogActions,
     MatFormField, MatSelect, MatLabel, MatOption,
     MatSidenavModule,MatToolbarModule,MatButtonModule,
-    MatListModule, MatListItemIcon, MatIconAnchor, MatIconButton, MatIconModule
+    MatListModule, MatListItemIcon, MatIconAnchor, MatIconButton, MatIconModule,
+    MsalModule
   ],
   providers: [
+    {
+      provide: MSAL_INSTANCE,
+      useFactory: MSALInstanceFactory
+    },
+    MsalService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
