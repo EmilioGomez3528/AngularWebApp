@@ -176,6 +176,18 @@ namespace Angular1.Server.Controllers
             }
         }
 
+
+        [HttpPost("OAuth")]
+        public async Task<IActionResult> OAuthLogin([FromBody] OAuthLoginRequest model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userData.OAuthLogin(model.FirstName, model.LastName, model.Email, model.ProviderUserId);
+
+            return Ok(result);
+        }
+
     }
 
 
@@ -199,5 +211,12 @@ namespace Angular1.Server.Controllers
     {
         public int UserId { get; set; }
         public int OrganizationId { get; set; }
+    }
+    public class OAuthLoginRequest
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string ProviderUserId { get; set; }
     }
 }

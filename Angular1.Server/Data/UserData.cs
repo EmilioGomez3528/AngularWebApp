@@ -307,5 +307,52 @@ namespace Angular1.Server.Data
                 }
             }
         }
+
+
+        //Metodo 8 DE PROCEDIMIENTOS ALMACENADOS
+
+        //METODO DE AUTENTICACION CON MICROSOFT Y GOOGLE
+        public async Task<User> OAuthLogin(string FirstName, string LastName, string Email, string ProviderUserId)
+        {
+            using (var con = new SqlConnection(conection))
+            {
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("gkan.Emilio_OAuth", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@FirstName", FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", LastName);
+                    cmd.Parameters.AddWithValue("@Email", Email);
+                    cmd.Parameters.AddWithValue("@ProviderUserId", ProviderUserId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var response = new User();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                response.UserId = reader.GetInt32(reader.GetOrdinal("UserId"));
+                                response.FirstName = reader["FirstName"].ToString();
+                                response.LastName = reader["LastName"].ToString();
+                                response.Email = reader["Email"].ToString();
+                                response.Message = "Usuario autenticado correctamente";
+                            }
+                        }
+                        else
+                        {
+                            response.Message = "Usuario no encontrado o credenciales incorrectas";
+                        }
+
+                        return response;
+                    }
+                }
+            }
+        }
+
+
     }
 }

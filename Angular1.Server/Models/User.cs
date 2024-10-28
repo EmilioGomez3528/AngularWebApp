@@ -14,5 +14,8 @@
         public string? Roles { get; set; }
         public bool PasswordEncrypted { get; set; }
         public string? PasswordSalt { get; set; }
+        public string? ProviderUserId { get; set; }
+        public string Message { get; set; }
+
     }
 }
