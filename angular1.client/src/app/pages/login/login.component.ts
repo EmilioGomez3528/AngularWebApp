@@ -32,6 +32,7 @@ export class LoginComponent {
     this.userService.login(this.username, this.password).subscribe(
       (response) => {
         // const userID = response.userId; //Obtiene el valor de ID del objeto
+        console.log(response)
         this.authService.setLoginStatus(response); 
         this.router.navigate (['/', 'dashboard']);//Redirige a dashboard si los datos son correctos
 
@@ -67,51 +68,67 @@ export class LoginComponent {
 
   loginWithMicrosoft() {
     sessionStorage.removeItem('msal.interaction.status');
-    this.msalService.loginPopup().subscribe( (response: AuthenticationResult) => {
-      this.msalService.instance.setActiveAccount(response.account)
-    });
-  }
+    this.msalService.loginPopup({
+      scopes: ['user.read']
+    }).subscribe(
+      (response: AuthenticationResult) => {
+        this.msalService.instance.setActiveAccount(response.account);
+        
+        const claims = response.idTokenClaims as {
+          name?: string;
+          preferred_username?: string;
+          sub?: string;
+        };
 
-  
-  isLoggedIn() : boolean {
-    return this.msalService.instance.getActiveAccount() != null
-    
+        if (claims) {
+          this.name = claims.name;
+          this.preferredUsername = claims.preferred_username;
+          this.providerId = claims.sub;
+
+          const [firstName = '', lastName = ''] = this.name?.split(' ') || [];
+
+          console.log("First Name:", firstName);
+          console.log("Last Name:", lastName);
+          console.log("Correo:", this.preferredUsername);
+          console.log("Sub:", this.providerId);
+
+          if (this.preferredUsername && this.providerId) {
+            this.userService.OAuth(firstName, lastName, this.preferredUsername, this.providerId).subscribe(
+              (authResponse) => {
+                console.log("Esto se ejecutó yaaa");
+                this.authService.setLoginStatus(authResponse);
+                this.router.navigate(['/', 'dashboard']);
+              },
+              (authError) => {
+                console.error("Error en la autenticación", authError);
+                this.errorMessage = 'Autenticación fallida. Por favor, intente de nuevo.';
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Error de autenticación, intente de nuevo por favor.",
+                });
+              }
+            );
+          } else {
+            console.error("preferredUsername o providerId están indefinidos");
+          }
+        }
+      },
+      (error) => {
+        console.error('Error en el login', error);
+        this.errorMessage = 'Autenticación fallida. Por favor, intente de nuevo.';
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Error de inicio de sesión, intente de nuevo por favor.",
+        });
+      }
+    );
   }
 
   logoutWithMicrosoft() {
     this.msalService.logout();
     
   }
-
-
-  getUserInfo() {
-    this.msalService.loginPopup({
-      scopes: ['user.read'] 
-    }).subscribe({
-      next: (response: any) => {
-        const claims = response.idTokenClaims;
-  
-        if (claims) {
-          this.name = claims.name;
-          this.preferredUsername = claims.preferred_username;
-          this.providerId = claims.sub;
-  
-          console.log("Nombre:", this.name);
-          console.log("Correo:", this.preferredUsername);
-          console.log("Sub:", this.providerId);
-        }
-  
-        if (response && response.account) {
-          this.username = response.account.username;
-          console.log("Nombre de usuario:", this.username);
-        }
-      },
-      error: (err) => {
-        console.error('Error al iniciar sesión', err);
-      }
-    });
-  }
-  
-
 
 }

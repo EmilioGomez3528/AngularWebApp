@@ -47,4 +47,10 @@ export class UserService {
     const userData = { userId, organizationId }
     return this.http.post<any>(`${this.apiUrl}/AddOrphanUser`, userData);
   }
+
+  //metodo para logion con microsoft
+  OAuth(firstName: string, lastName: string, email: string, providerUserId: string) {
+    const loginData = { firstName, lastName, email, providerUserId }; 
+    return this.http.post<any>(`${this.apiUrl}/OAuth`, loginData);
+  }
 }

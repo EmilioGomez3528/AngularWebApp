@@ -70,17 +70,4 @@
       </form>
     </div>
   </div>
-
-
-  <div *ngIf="isLoggedIn()">
-    <h3>Estas logueado con Microsoft</h3>
-    <button class="btn btn-danger" (click)="logoutWithMicrosoft()">Cerrar sesion</button>
-    <button (click)="getUserInfo()">Obtener datos</button>
-    <p><strong>Nombre:</strong> {{ name }}</p>
-    <p><strong>Correo:</strong> {{ preferredUsername }}</p>
-    <p><strong>ProviderId:</strong> {{ providerId }}</p>
-  </div>
-  <div *ngIf="!isLoggedIn()">
-    <h3>No estas logueado con Microsoft</h3>
-  </div>
 </body>
