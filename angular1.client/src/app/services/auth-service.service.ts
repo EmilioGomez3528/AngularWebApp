@@ -27,7 +27,4 @@ export class AuthServiceService {
     return JSON.parse(_user);
   }
 
-
-
-
 }

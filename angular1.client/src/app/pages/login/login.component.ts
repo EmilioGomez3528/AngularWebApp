@@ -23,7 +23,6 @@ export class LoginComponent {
 
   constructor (private userService: UserService, private authService: AuthServiceService , private router: Router, private msalService: MsalService) { 
     msalService.initialize().subscribe(result => { console.log(result)  })
-    
   }
 
 
@@ -69,6 +68,7 @@ export class LoginComponent {
   loginWithMicrosoft() {
     sessionStorage.removeItem('msal.interaction.status');
     this.msalService.loginPopup({
+      prompt: "login",
       scopes: ['user.read']
     }).subscribe(
       (response: AuthenticationResult) => {
@@ -95,7 +95,6 @@ export class LoginComponent {
           if (this.preferredUsername && this.providerId) {
             this.userService.OAuth(firstName, lastName, this.preferredUsername, this.providerId).subscribe(
               (authResponse) => {
-                console.log("Esto se ejecutó yaaa");
                 this.authService.setLoginStatus(authResponse);
                 this.router.navigate(['/', 'dashboard']);
               },
