@@ -5,6 +5,7 @@ import { AuthServiceService } from '../../services/auth-service.service';
 import Swal from 'sweetalert2'
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-browser';
+import { OAuthGoogleService } from '../../services/oauth-google.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class LoginComponent {
   preferredUsername?: string;
   providerId?: string;
 
-  constructor (private userService: UserService, private authService: AuthServiceService , private router: Router, private msalService: MsalService) { 
+  constructor (private userService: UserService, private authService: AuthServiceService , private router: Router, private msalService: MsalService, private googleService: OAuthGoogleService) { 
     msalService.initialize().subscribe(result => { console.log(result)  })
   }
 
@@ -125,9 +126,8 @@ export class LoginComponent {
     );
   }
 
-  logoutWithMicrosoft() {
-    this.msalService.logout();
-    
+  loginWithGoogle() {
+    this.googleService.loginGoogle();
   }
 
 }

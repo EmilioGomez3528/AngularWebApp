@@ -18,7 +18,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Detecta cambios de ruta y oculta Header y Sidebar si es la ruta de login
     this.router.events.subscribe(() => {
-      this.showHeaderSidebar = this.router.url !== '/login';
+      const baseUrl = this.router.url.split('?')[0].split('#')[0]; 
+      this.showHeaderSidebar = !['/login', '/authLoader'].includes(baseUrl);
     });
     
   }

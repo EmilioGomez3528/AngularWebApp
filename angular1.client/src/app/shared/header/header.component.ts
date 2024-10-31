@@ -3,6 +3,7 @@ import { AuthServiceService } from '../../services/auth-service.service';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MsalService } from '@azure/msal-angular';
+import { OAuthGoogleService } from '../../services/oauth-google.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   userData: any;
 
-  constructor(private authService: AuthServiceService, private router: Router, private msalService: MsalService) {
+  constructor(private authService: AuthServiceService, private router: Router, private msalService: MsalService, private googleService: OAuthGoogleService) {
 
     this.userData = authService.getUser();
   }
@@ -28,6 +29,8 @@ export class HeaderComponent {
   signOut() {
     // Remueve el userId específico si existe
     sessionStorage.removeItem('userId');
+    
+    this.googleService.logOutGoogle();
 
     // Define patrones de MSAL y otros elementos de autenticación que desees eliminar
     const patterns = ["00000000-0000-0000", "msal.", "Microsoft", "login.microsoftonline"];

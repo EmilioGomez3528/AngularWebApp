@@ -30,6 +30,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { AddUsersComponent } from './pages/add-users/add-users.component';
 import { MSAL_INSTANCE, MsalModule, MsalService } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthLoaderComponent } from './shared/auth-loader/auth-loader.component';
 
 
 export function MSALInstanceFactory(): IPublicClientApplication{
@@ -53,7 +55,8 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     ProfileComponent,
     OrphanUsersComponent,
     UserDetailsComponent,
-    AddUsersComponent
+    AddUsersComponent,
+    AuthLoaderComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -64,7 +67,7 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     MatFormField, MatSelect, MatLabel, MatOption,
     MatSidenavModule,MatToolbarModule,MatButtonModule,
     MatListModule, MatListItemIcon, MatIconAnchor, MatIconButton, MatIconModule,
-    MsalModule
+    MsalModule, OAuthModule.forRoot()
   ],
   providers: [
     {
