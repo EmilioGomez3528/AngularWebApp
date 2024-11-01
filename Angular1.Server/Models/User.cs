@@ -16,6 +16,7 @@
         public string? PasswordSalt { get; set; }
         public string? ProviderUserId { get; set; }
         public string Message { get; set; }
+        public string Provider { get; set; }
 
     }
 }

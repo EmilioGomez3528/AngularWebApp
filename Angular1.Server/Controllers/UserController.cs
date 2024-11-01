@@ -183,7 +183,7 @@ namespace Angular1.Server.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _userData.OAuthLogin(model.FirstName, model.LastName, model.Email, model.ProviderUserId);
+            var result = await _userData.OAuthLogin(model.FirstName, model.LastName, model.Email, model.ProviderUserId, model.Provider);
 
             return Ok(result);
         }
@@ -218,5 +218,6 @@ namespace Angular1.Server.Controllers
         public string LastName { get; set; }
         public string Email { get; set; }
         public string ProviderUserId { get; set; }
+        public string Provider {  get; set; }
     }
 }

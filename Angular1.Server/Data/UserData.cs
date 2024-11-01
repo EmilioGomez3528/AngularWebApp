@@ -312,7 +312,7 @@ namespace Angular1.Server.Data
         //Metodo 8 DE PROCEDIMIENTOS ALMACENADOS
 
         //METODO DE AUTENTICACION CON MICROSOFT Y GOOGLE
-        public async Task<User> OAuthLogin(string FirstName, string LastName, string Email, string ProviderUserId)
+        public async Task<User> OAuthLogin(string FirstName, string LastName, string Email, string ProviderUserId, string Provider)
         {
             using (var con = new SqlConnection(conection))
             {
@@ -326,6 +326,7 @@ namespace Angular1.Server.Data
                     cmd.Parameters.AddWithValue("@LastName", LastName);
                     cmd.Parameters.AddWithValue("@Email", Email);
                     cmd.Parameters.AddWithValue("@ProviderUserId", ProviderUserId);
+                    cmd.Parameters.AddWithValue("@Provider", Provider);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
