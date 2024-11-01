@@ -21,6 +21,7 @@ export class LoginComponent {
   name?: string;
   preferredUsername?: string;
   providerId?: string;
+  provider?: string;
 
   constructor (private userService: UserService, private authService: AuthServiceService , private router: Router, private msalService: MsalService, private googleService: OAuthGoogleService) { 
     msalService.initialize().subscribe(result => { console.log(result)  })
@@ -85,6 +86,8 @@ export class LoginComponent {
           this.name = claims.name;
           this.preferredUsername = claims.preferred_username;
           this.providerId = claims.sub;
+          this.provider = 'Microsoft'
+          
 
           const [firstName = '', lastName = ''] = this.name?.split(' ') || [];
 
@@ -92,9 +95,10 @@ export class LoginComponent {
           console.log("Last Name:", lastName);
           console.log("Correo:", this.preferredUsername);
           console.log("Sub:", this.providerId);
+          console.log("Provider:", this.provider);
 
           if (this.preferredUsername && this.providerId) {
-            this.userService.OAuth(firstName, lastName, this.preferredUsername, this.providerId).subscribe(
+            this.userService.OAuth(firstName, lastName, this.preferredUsername, this.providerId, this.provider).subscribe(
               (authResponse) => {
                 this.authService.setLoginStatus(authResponse);
                 this.router.navigate(['/', 'dashboard']);

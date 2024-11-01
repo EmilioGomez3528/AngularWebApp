@@ -49,8 +49,8 @@ export class UserService {
   }
 
   //metodo para logion con microsoft
-  OAuth(firstName: string, lastName: string, email: string, providerUserId: string) {
-    const loginData = { firstName, lastName, email, providerUserId }; 
+  OAuth(firstName: string, lastName: string, email: string, providerUserId: string, provider: string) {
+    const loginData = { firstName, lastName, email, providerUserId, provider };
     return this.http.post<any>(`${this.apiUrl}/OAuth`, loginData);
   }
 }
