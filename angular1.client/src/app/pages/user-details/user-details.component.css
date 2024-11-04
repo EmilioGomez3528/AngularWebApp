@@ -1,24 +1,31 @@
 .section-title {
     font-family: 'Aileron', sans-serif;
-    font-size: 28px;
+    font-size: 35px;
     font-weight: bold;
-    margin: 20px 0; /* Espacio vertical uniforme */
-    border-bottom: 2px solid #e0e0e0; /* Línea sutil debajo del título */
-    padding-bottom: 30px; /* Espacio debajo del texto */
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px; /* Espacio debajo del texto */
+    margin: 10px 0; /* Espacio vertical uniforme */
+    border-bottom: 2px solid #000000; /* Línea sutil debajo del título */
+    border-radius: 10px;
+    background-color: #e0e0e0; /*Color de fondo*/
 }
 
 .organization-list {
     margin: 0 20px; /* Espacio lateral */
     text-align: left;
+    padding-top: 30px; /*Espacio entre titulo y tarjeta*/
 }
 
 .organization-container {
-    background-color: #f9f9f9; /* Color de fondo sutil */
-    border-radius: 8px; /* Bordes redondeados */
+    background-color: #f2f2f2; /* Color de fondo sutil */
+    border: 2px solid #555353; /* Contorno de la tarjeta */
+    border-radius: 10px; /* Bordes redondeados */
     padding: 15px; /* Espaciado interno */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
     margin-bottom: 20px; /* Espacio entre organizaciones */
     transition: transform 0.2s; /* Transición suave para efecto hover */
+
 }
 
 .organization-container:hover {
@@ -65,8 +72,8 @@ li:hover {
 
 .back-button {
     position: absolute; /* Mantener la posición absoluta */
-    left: 20px; /* Distancia desde el lado izquierdo */
-    top: 70px; /* Aumentar el espacio desde la parte superior */
+    left: 30px; /* Distancia desde el lado izquierdo */
+    top: 138px; /* Aumentar el espacio desde la parte superior */
     display: flex; /* Permitir alinear el icono y el texto */
     align-items: center; /* Centrar verticalmente el texto */
     padding: 10px 15px; /* Espaciado interno */

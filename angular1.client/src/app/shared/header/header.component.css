@@ -19,4 +19,30 @@
     padding: 10px;
     text-align: center;
   }
-  
+
+
+/* Estilo del botón toggle para el sidebar */
+.nav-link i {
+  font-size: 40px; /* Aumentar el tamaño del ícono */
+  transition: transform 0.3s ease, color 0.3s ease; /* Transición suave para la animación */
+  color: #000000; /* Color inicial del ícono */
+}
+
+.nav-link:hover i {
+  transform: scale(1.3) rotate(90deg); /* Ampliar y rotar el ícono al pasar el mouse */
+  color: #326ceb; /* Cambiar color al pasar el mouse */
+}
+
+/* Aumentar el área de clic del botón */
+.nav-item {
+  padding: 5px; /* Espaciado para hacer el área de clic más grande */
+}
+
+/* Mejora visual del fondo del navbar al pasar el mouse */
+.navbar {
+  transition: background-color 0.3s ease;
+}
+
+.navbar:hover {
+  background-color: rgba(255, 255, 255, 0.9); /* Cambiar el color de fondo al pasar el mouse */
+}

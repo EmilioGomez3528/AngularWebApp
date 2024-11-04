@@ -1,29 +1,41 @@
+/* Título de la sección */
 .section-title {
   font-family: 'Aileron', sans-serif;
-  font-size: 28px;
-  font-weight: bold;
-  margin: 20px 0; /* Espacio vertical uniforme */
-  border-bottom: 2px solid #e0e0e0; /* Línea sutil debajo del título */
-  padding-bottom: 30px; /* Espacio debajo del texto */
+  font-size: 35px; /* Tamaño del texto */
+  text-align: center; /*alineacion del texo*/
+  font-weight: bold; 
+  margin: 10px 0;
+  padding-top: 50px; /*Espacio superior del texto*/
+  padding-bottom: 50px; /* Espacio debajo del texto */
+  /* border-bottom: 2px solid #414040; Línea sutil debajo del texto */
+  border-radius: 10px; 
+  background-color: #e0e0e0;
 }
 
-/* From Uiverse.io by vinodjangid07 */
+/* Botón de detalles minimalista con animación */
 .setting-btn {
-  width: 45px;
-  height: 45px;
+  width: 45px; /* Tamaño reducido */
+  height: 45px; /* Tamaño reducido */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  background-color: rgb(129, 110, 216);
-  border-radius: 10px;
+  gap: 4px; /* Espacio reducido entre las barras */
+  background-color: #8b8b8b; /* Color neutro */
+  border-radius: 10px; /* Bordes redondeados */
   cursor: pointer;
   border: none;
-  box-shadow: 0px 0px 0px 2px rgb(212, 209, 255);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  transition: background-color 0.3s, transform 0.2s;
 }
+
+.setting-btn:hover {
+  background-color: #bbb; /* Cambio de color en hover */
+  transform: scale(1.05); /* Ligera ampliación al pasar el mouse */
+}
+
 .bar {
-  width: 50%;
+  width: 40%; /* Ajuste para un diseño más pequeño */
   height: 2px;
   background-color: rgb(229, 229, 229);
   display: flex;
@@ -31,7 +43,9 @@
   justify-content: center;
   position: relative;
   border-radius: 2px;
+  transition: all 0.3s; /* Añadir transición suave */
 }
+
 .bar::before {
   content: "";
   width: 2px;
@@ -43,48 +57,124 @@
   transition: all 0.3s;
   box-shadow: 0px 0px 5px white;
 }
+
 .bar1::before {
   transform: translateX(-4px);
 }
+
 .bar2::before {
   transform: translateX(4px);
 }
+
+/* Animación de las barras al pasar el mouse */
 .setting-btn:hover .bar1::before {
   transform: translateX(4px);
 }
+
 .setting-btn:hover .bar2::before {
   transform: translateX(-4px);
 }
 
-
+/* Contenedor de la tarjeta */
 .dashboard-card {
   padding: 20px;
   border-radius: 15px;
+  background-color: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #555353; /* Contorno de la tarjeta */
 }
 
-.controls {
+/* Estilo para el contenedor principal */
+.content {
+  padding: 10px; /* Espacio interior */
+  background-color: #f9f9f9; /* Fondo suave */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Contenedor del selector de organización */
+.organization-selector {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
-.action-button {
-  width: 150px;
-}
-
+/* Ajuste del campo de selección */
 .select-field {
-  width: 200px;
+  font-family: 'Aileron', sans-serif;
+  width: 180px;
 }
 
+.mat-label {
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .select-field {
+    width: 100%;
+  }
+  .organization-selector {
+    justify-content: center;
+  }
+}
+
+/* Contenedor del datatable sin restricción de altura */
 .datatable-container {
-  max-height: 400px;
-  overflow: visible;
-  border-radius: 20px;
-  border: 1px solid #ccc;
+  border-radius: 10px; /* Bordes redondeados */
+  border: 1px solid #ccc; /* Borde sutil */
   padding: 10px;
+  background-color: #ffffff; /* Fondo del datatable */
+  margin-bottom: 20px; /* Espacio inferior para que el contenido no toque el paginador */
 }
 
+/* Tabla */
+/* Tabla con filas alternadas */
 table {
   width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* Colores de fondo alternados para las filas */
+table tr:nth-child(even) {
+  background-color: #e7f3ff; /* Color  para las filas pares */
+}
+
+table tr:nth-child(odd) {
+  background-color: #ffffff; /* Color las filas impares */
+}
+
+/* Estilos adicionales opcionales */
+table th {
+  position: sticky;
+  background-color: #e0e0e0; /* Color de fondo para el encabezado */
+  font-weight: bold;
+  text-align: left;
+}
+
+table td {
+  border-bottom: 1px solid #ddd; /* Línea de separación entre filas */
+}
+
+/* Mantener el paginador en la parte inferior */
+.mat-paginator {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .datatable-container {
+    height: 400px; /* Altura menor en pantallas pequeñas */
+  }
 }
