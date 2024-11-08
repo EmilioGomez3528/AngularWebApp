@@ -4,6 +4,7 @@
     {
         public int UserId { get; set; }
         public int OrganizationId { get; set; }
+        public int? IsOauth { get; set; }
         public string? Username { get; set; }
         public string? Password { get; set; }
         public string? FirstName { get; set; }
@@ -17,6 +18,7 @@
         public string? ProviderUserId { get; set; }
         public string Message { get; set; }
         public string Provider { get; set; }
+        public string? Initials { get; set; }
 
     }
 }

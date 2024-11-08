@@ -1,4 +1,5 @@
 ﻿using Angular1.Server.Models;
+using Azure;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
@@ -69,7 +70,9 @@ namespace Angular1.Server.Data
                                 FirstName = reader["FirstName"] != DBNull.Value ? reader["FirstName"].ToString() : string.Empty,
                                 LastName = reader["LastName"] != DBNull.Value ? reader["lastName"].ToString() : string.Empty,
                                 Email = reader["Email"] != DBNull.Value ? reader["Email"].ToString() : string.Empty,
-                                PasswordSalt = reader["PasswordSalt"] != DBNull.Value ? reader["PasswordSalt"].ToString() : string.Empty
+                                Initials = reader["Initials"] != DBNull.Value ? reader["Initials"].ToString() : string.Empty,
+                                PasswordSalt = reader["PasswordSalt"] != DBNull.Value ? reader["PasswordSalt"].ToString() : string.Empty,
+                                IsOauth = reader["IsOauth"] != DBNull.Value ? (int?)reader["IsOauth"] : null
                             };
                         }
                     }
@@ -312,7 +315,7 @@ namespace Angular1.Server.Data
         //Metodo 8 DE PROCEDIMIENTOS ALMACENADOS
 
         //METODO DE AUTENTICACION CON MICROSOFT Y GOOGLE
-        public async Task<User> OAuthLogin(string FirstName, string LastName, string Email, string ProviderUserId, string Provider)
+        public async Task<bool> OAuthLogin(string FirstName, string LastName, string Email, string ProviderUserId, string Provider)
         {
             using (var con = new SqlConnection(conection))
             {
@@ -328,28 +331,8 @@ namespace Angular1.Server.Data
                     cmd.Parameters.AddWithValue("@ProviderUserId", ProviderUserId);
                     cmd.Parameters.AddWithValue("@Provider", Provider);
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        var response = new User();
 
-                        if (reader.HasRows)
-                        {
-                            while (await reader.ReadAsync())
-                            {
-                                response.UserId = reader.GetInt32(reader.GetOrdinal("UserId"));
-                                response.FirstName = reader["FirstName"].ToString();
-                                response.LastName = reader["LastName"].ToString();
-                                response.Email = reader["Email"].ToString();
-                                response.Message = "Usuario autenticado correctamente";
-                            }
-                        }
-                        else
-                        {
-                            response.Message = "Usuario no encontrado o credenciales incorrectas";
-                        }
-
-                        return response;
-                    }
+                    return true;
                 }
             }
         }

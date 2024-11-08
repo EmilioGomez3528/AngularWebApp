@@ -22,7 +22,7 @@ namespace Angular1.Server.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
 
-            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Username) || string.IsNullOrEmpty(loginRequest.Password))
+            if (loginRequest == null || string.IsNullOrEmpty(loginRequest.Username))
             {
                 return BadRequest("Username o password no pueden estar vacíos");
             }
@@ -35,24 +35,27 @@ namespace Angular1.Server.Controllers
                 return Unauthorized("Credenciales inválidas");
             }
 
-
-            var passwordEncrypted = Hash.ComputeSaltedHash(loginRequest.Password, user.PasswordSalt);
-            if (passwordEncrypted.Equals(user.Password))
+            if (loginRequest.IsLocal == false)
             {
                 //Acceso
                 return Ok(user);
             }
             else
             {
-                Console.WriteLine("The password = " + passwordEncrypted);
-                //disparar alerta, usuario incorrecto
-                return Unauthorized("Los password no corresponden");
-                
+                var passwordEncrypted = Hash.ComputeSaltedHash(loginRequest.Password, user.PasswordSalt);
+                if (passwordEncrypted.Equals(user.Password))
+                {
+                    //Acceso
+                    return Ok(user);
+                }
+                else
+                {
+                    Console.WriteLine("The password = " + passwordEncrypted);
+                    //disparar alerta, usuario incorrecto
+                    return Unauthorized("Los password no corresponden");
+
+                }
             }
-
-
-
-            
         }
 
 
@@ -195,6 +198,7 @@ namespace Angular1.Server.Controllers
     {
         public string Username { get; set; }
         public string Password { get; set; }
+        public bool IsLocal { get; set; }
     }
 
     public class UserRequest
