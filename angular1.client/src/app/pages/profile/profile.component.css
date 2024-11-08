@@ -1,0 +1,326 @@
+/* Título de la sección */
+.section-title {
+    font-family: 'Aileron', sans-serif;
+    font-size: 35px; /* Tamaño del texto */
+    text-align: center; /*alineacion del texo*/
+    font-weight: bold; 
+    margin: 10px 0;
+    padding-top: 30px; /*Espacio superior del texto*/
+    padding-bottom: 30px; /* Espacio debajo del texto */
+    /* border-bottom: 2px solid #414040; Línea sutil debajo del texto */
+    border-radius: 10px; 
+    background-color: #e0e0e0;
+}
+
+
+.back-button {
+    position: absolute; /* Mantener la posición absoluta */
+    left: 30px; /* Distancia desde el lado izquierdo */
+    top: 120px; /* Aumentar el espacio desde la parte superior */
+    display: flex; /* Permitir alinear el icono y el texto */
+    align-items: center; /* Centrar verticalmente el texto */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: #f44336; /* Fondo rojo */
+    color: white; /* Color del texto blanco */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Eliminar subrayado */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.back-button:hover {
+    background-color: #d32f2f; /* Color más oscuro al pasar el mouse */
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 6rem;
+    border: 2px solid #555353; /* Contorno de la tarjeta */
+    border-radius: 10px;
+    background-color: #e0e0e0;
+    max-width: 1300px; /* Tamaño a lo largo */
+    margin: auto;
+    font-family: 'Aileron', sans-serif;
+    flex-wrap: wrap;
+  }
+  
+  .profile-image {
+    flex-shrink: 0;
+    width: 250px; /* Tamaño del circulo de la imagen */
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-image img {
+    width: 100%; /* Tamaño de la imagen */
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .profile-details {
+    font-family: 'Aileron', sans-serif;
+    flex: 1; /* Permite que esta sección tome el espacio restante */
+    min-width: 250px; /* Tamaño mínimo para que los datos no se ajusten demasiado en pantallas pequeñas */
+  }
+  
+  .profile-details h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #333;
+  }
+  
+  .profile-details p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .profile-details strong {
+    color: #333;
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .profile-container {
+      flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+      align-items: center;
+      text-align: center;
+      
+    }
+  
+    .profile-image {
+      width: 150px; /* Ajusta el tamaño de la imagen para pantallas pequeñas */
+      height: 150px;
+    }
+  
+    .profile-details h2 {
+      font-size: 1.5rem;
+    }
+  
+    .profile-details p {
+      font-size: 0.9rem;
+    }
+  }
+
+
+
+/* Estilos del botón de edición */
+.Btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100px;
+  height: 40px;
+  border: none;
+  padding: 0px 20px;
+  background-color: rgb(168, 38, 255);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px rgb(140, 32, 212);
+  transition-duration: 0.3s;
+}
+
+.svg {
+  width: 13px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  fill: white;
+  transition-duration: 0.3s;
+}
+
+.Btn:hover {
+  color: transparent;
+}
+
+.Btn:hover .svg {
+  right: 43%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition-duration: 0.3s;
+}
+
+.Btn:active {
+  transform: translate(3px, 3px);
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 0px rgb(140, 32, 212);
+}
+
+/* Estilos adicionales */
+.profile-container {
+  position: relative;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form label {
+  font-weight: bold;
+}
+
+.edit-form input {
+  margin-bottom: 10px;
+}
+
+
+
+/* Unique Styling for Cancel Button */
+.Btn-cancel {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(255, 65, 65);
+}
+
+/* Icon Styling */
+.Btn-cancel .sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Btn-cancel .sign svg {
+  width: 17px;
+}
+
+.Btn-cancel .sign svg path {
+  fill: white;
+}
+
+/* Text Styling */
+.Btn-cancel .text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+
+/* Button Hover Effect */
+.Btn-cancel:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.Btn-cancel:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+
+.Btn-cancel:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+
+/* Button Active Click Effect */
+.Btn-cancel:active {
+  transform: translate(2px, 2px);
+}
+
+
+
+/* Unique Styling for Save Button */
+.Btn-save {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(65, 168, 65); /* Green color */
+}
+
+/* Icon Styling */
+.Btn-save .sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Btn-save .sign svg {
+  width: 17px;
+}
+
+.Btn-save .sign svg path {
+  fill: white;
+}
+
+/* Text Styling */
+.Btn-save .text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+
+/* Button Hover Effect */
+.Btn-save:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.Btn-save:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+
+.Btn-save:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+
+/* Button Active Click Effect */
+.Btn-save:active {
+  transform: translate(2px, 2px);
+}
+
+  /* Espaciado entre botones */
+.Btn, .Btn-save {
+  margin-right: 10px; /* Agrega espacio a la derecha de cada botón */
+}
+
+  
+

@@ -8,4 +8,5 @@ export interface UserDetails {
     lastName: string;
     email: string;
     createdDate: Date;
+    initials: string
 }

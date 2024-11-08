@@ -1,7 +1,7 @@
 .back-button {
     position: absolute; /* Mantener la posición absoluta */
-    left: 20px; /* Distancia desde el lado izquierdo */
-    top: 70px; /* Aumentar el espacio desde la parte superior */
+    left: 30px; /* Distancia desde el lado izquierdo */
+    top: 138px; /* Aumentar el espacio desde la parte superior */
     display: flex; /* Permitir alinear el icono y el texto */
     align-items: center; /* Centrar verticalmente el texto */
     padding: 10px 15px; /* Espaciado interno */
@@ -17,11 +17,23 @@
     background-color: #d32f2f; /* Color más oscuro al pasar el mouse */
 }
 
+/* Título de la sección */
 .section-title {
     font-family: 'Aileron', sans-serif;
-    font-size: 28px;
+    font-size: 35px; /* Tamaño del texto */
+    text-align: center; /*alineacion del texo*/
+    font-weight: bold; 
+    margin: 10px 0;
+    padding-top: 50px; /*Espacio superior del texto*/
+    padding-bottom: 50px; /* Espacio debajo del texto */
+    /* border-bottom: 2px solid #414040; Línea sutil debajo del texto */
+    border-radius: 10px; 
+    background-color: #e0e0e0;
+}
+
+.selected-field{
+    font-family: 'Aileron', sans-serif;
+    font-size: 20px;
     font-weight: bold;
-    margin: 20px 0; /* Espacio vertical uniforme */
-    border-bottom: 2px solid #e0e0e0; /* Línea sutil debajo del título */
-    padding-bottom: 30px; /* Espacio debajo del texto */
+    margin: 0; 
 }

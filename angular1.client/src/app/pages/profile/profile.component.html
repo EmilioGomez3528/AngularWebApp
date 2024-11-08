@@ -1,1 +1,55 @@
-<p>profile works!</p>
+<h4 class="section-title bi bi-person">Perfil</h4>
+
+<a routerLink="/dashboard" class="back-button">
+  <mat-icon>arrow_back</mat-icon> Back
+</a>
+
+<div class="profile-container position-relative">
+  <!-- Botón de editar en la esquina superior derecha -->
+  <button *ngIf="!isEditMode" (click)="enableEditMode()" class="Btn position-absolute top-0 end-0 m-3">
+    Editar
+    <svg class="svg" viewBox="0 0 512 512">
+      <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+    </svg>
+  </button>
+
+  <!-- Contenido restante del perfil (imagen, datos y formulario de edición) -->
+  <div class="profile-image">
+    <img src="/assets/img/user2-160x160.jpg" alt="User Image" />
+  </div>
+  <div class="profile-details">
+    <h2 *ngIf="!isEditMode">{{ userData.firstName }} {{ userData.lastName }}</h2>
+    <p *ngIf="!isEditMode"><i class="bi bi-envelope"></i> <strong>Email:</strong> {{ userData.email }}</p>
+    <p *ngIf="!isEditMode"><i class="bi bi-person"></i> <strong>Username:</strong> {{ userData.username }}</p>
+    <!-- Formulario de edición -->
+    <form *ngIf="isEditMode" (ngSubmit)="onSubmit()" class="edit-form">
+      <label for="firstName">Nombre:</label>
+      <input type="text" id="firstName" [(ngModel)]="editData.firstName" name="firstName" class="form-control mb-2" required />
+      <label for="lastName">Apellido:</label>
+      <input type="text" id="lastName" [(ngModel)]="editData.lastName" name="lastName" class="form-control mb-2" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" [(ngModel)]="editData.email" name="email" class="form-control mb-2" required />
+      <label for="username">Username:</label>
+      <input type="text" id="username" [(ngModel)]="editData.username" name="username" class="form-control mb-2" required />
+      <div class="d-flex justify-content-end">
+        <button class="Btn-save">
+          <div class="sign">
+            <svg viewBox="0 0 512 512">
+              <path d="M173.9 439.4c-8.5 8.5-22.4 8.5-30.9 0L7 303.4c-8.5-8.5-8.5-22.4 0-30.9s22.4-8.5 30.9 0L160 395.7 474.1 81.6c8.5-8.5 22.4-8.5 30.9 0s8.5 22.4 0 30.9L173.9 439.4z"/>
+            </svg>
+          </div>
+          <div class="text">Guardar</div>
+        </button>        
+        <button class="Btn-cancel">
+          <div class="sign">
+            <svg viewBox="0 0 320 512">
+              <path d="M310.6 361.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L160 301.3 54.6 406.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L114.7 256 9.4 150.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 210.7l105.4-105.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L205.3 256l105.4 105.4z"/>
+            </svg>
+          </div>
+          <div class="text">Cancelar</div>
+        </button>                       
+      </div>
+    </form>
+  </div>
+</div>
+

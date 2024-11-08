@@ -22,6 +22,8 @@ export class LoginComponent {
   preferredUsername?: string;
   providerId?: string;
   provider?: string;
+  initials?: string;
+  IsLocal: Boolean = false;
 
   constructor (private userService: UserService, private authService: AuthServiceService , private router: Router, private msalService: MsalService, private googleService: OAuthGoogleService) { 
     msalService.initialize().subscribe(result => { console.log(result)  })
@@ -30,13 +32,14 @@ export class LoginComponent {
 
   //metodo que se llama al presionar el boton
   onSubmit() {
-    this.userService.login(this.username, this.password).subscribe(
+    this.userService.login(this.username, this.password, true).subscribe(
       (response) => {
         // const userID = response.userId; //Obtiene el valor de ID del objeto
         console.log(response)
         this.authService.setLoginStatus(response); 
         this.router.navigate (['/', 'dashboard']);//Redirige a dashboard si los datos son correctos
 
+        // alerta de inicio de sesion correcto
         const Toast = Swal.mixin({
           toast: true,
           position: "top",
@@ -57,6 +60,7 @@ export class LoginComponent {
       (error) => {
         console.error('Error en el login', error);
         this.errorMessage = 'Login failed. Please try again.';
+        // alerta de inicio de sesion incorrecto
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -68,7 +72,7 @@ export class LoginComponent {
 
 
   loginWithMicrosoft() {
-    sessionStorage.removeItem('msal.interaction.status');
+    sessionStorage.removeItem('msal.interaction.status'); //Quita valor de interaccion de la consola
     this.msalService.loginPopup({
       prompt: "login",
       scopes: ['user.read']
@@ -76,6 +80,7 @@ export class LoginComponent {
       (response: AuthenticationResult) => {
         this.msalService.instance.setActiveAccount(response.account);
         
+        // Obtencion de elementos del usuario
         const claims = response.idTokenClaims as {
           name?: string;
           preferred_username?: string;
@@ -96,13 +101,22 @@ export class LoginComponent {
           console.log("Correo:", this.preferredUsername);
           console.log("Sub:", this.providerId);
           console.log("Provider:", this.provider);
+          console.log( "Datos:", claims) 
 
           if (this.preferredUsername && this.providerId) {
             this.userService.OAuth(firstName, lastName, this.preferredUsername, this.providerId, this.provider).subscribe(
+              //RESPUESTA DEL METODO OAuth
               (authResponse) => {
-                this.authService.setLoginStatus(authResponse);
-                this.router.navigate(['/', 'dashboard']);
+                console.log("Respuesta OAuth:", authResponse)
+                var username = this.preferredUsername || "";
+                this.userService.login(username, "" , false).subscribe ( 
+                  (loginResponse) => {
+                    console.log("Respuesta de autenticacion:", loginResponse)
+                  this.authService.setLoginStatus(loginResponse);
+                  this.router.navigate(['/', 'dashboard']);
+                })
               },
+              //Error en el metodo OAuth
               (authError) => {
                 console.error("Error en la autenticación", authError);
                 this.errorMessage = 'Autenticación fallida. Por favor, intente de nuevo.';
@@ -113,7 +127,8 @@ export class LoginComponent {
                 });
               }
             );
-          } else {
+          } 
+          else {
             console.error("preferredUsername o providerId están indefinidos");
           }
         }

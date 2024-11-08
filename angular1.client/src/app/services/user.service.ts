@@ -15,9 +15,9 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   //metodo de logueo 
-  login(username: string, password: string): Observable<any> {
-    const loginData = { username, password };  
-    return this.http.post(`${this.apiUrl}/login`, loginData); 
+  login(username: string, password: string, IsLocal: Boolean): Observable<any> {
+    const loginData = { Username:username, password, IsLocal };
+    return this.http.post(`${this.apiUrl}/login`, loginData);
   }
 
   getDetails(): Observable<UserDetails[]> {
@@ -48,7 +48,7 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl}/AddOrphanUser`, userData);
   }
 
-  //metodo para logion con microsoft
+  //metodo para logion con microsoft y google
   OAuth(firstName: string, lastName: string, email: string, providerUserId: string, provider: string) {
     const loginData = { firstName, lastName, email, providerUserId, provider };
     return this.http.post<any>(`${this.apiUrl}/OAuth`, loginData);

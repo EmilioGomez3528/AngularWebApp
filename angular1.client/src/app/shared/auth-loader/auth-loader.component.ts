@@ -46,12 +46,17 @@ export class AuthLoaderComponent implements OnInit {
       console.log("Correo:", this.email);
       console.log("Sub:", this.sub);
       console.log("Provider:", this.provider)
+      console.log(data)
 
       if (this.email && this.sub) {
         this.userService.OAuth(firstName, lastName, this.email, this.sub, this.provider).subscribe(
           (authResponse) => {
-            this.authService.setLoginStatus(authResponse);
-            this.router.navigate(['/', 'dashboard']);
+            console.log("Respuesta OAuth:", authResponse);
+            var username = this.email || "";
+            this.userService.login(username, "", false).subscribe( (loginResponse) => {
+              this.authService.setLoginStatus(loginResponse);
+              this.router.navigate(['/', 'dashboard']);
+            })
           },
           (authError) => {
             console.error("Error en la autenticación", authError);
@@ -61,6 +66,7 @@ export class AuthLoaderComponent implements OnInit {
               title: "Oops...",
               text: "Autenticación fallida. Por favor, intente de nuevo.",
             });
+            this.router.navigate(['/', 'login']);
           }
         );
       } else {
