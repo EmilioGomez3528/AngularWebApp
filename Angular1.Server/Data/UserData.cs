@@ -337,6 +337,44 @@ namespace Angular1.Server.Data
             }
         }
 
+        //Metodo 9 DE PROCEDIMIENTOS ALMACENADOS
+
+        //METODO DE ACTUALIZACION DE DATOS DE PERFIL DE USUARIO
+
+        public async Task<bool> UpdateProfileUser(int userId, string FirstName, string LastName, string Email, string Username)
+        {
+            using (var con = new SqlConnection(conection))
+            {
+                //Abrir conexion a base de datos
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("gkan.Emilio_UpdateUser", con))
+                {
+                    //Definicion de tipo SP
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    //Definicion de parametros
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    cmd.Parameters.AddWithValue("@FirstName", FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", LastName);
+                    cmd.Parameters.AddWithValue("@Email", Email);
+                    cmd.Parameters.AddWithValue("@Username", Username);
+
+                    try
+                    {
+                        //Ejecucion de procedimiento almacenado
+                        int rowsAffected = await cmd.ExecuteNonQueryAsync();
+
+                        return true;
+
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception("Error al actualizar usuario" + e.Message);
+                    }
+                }
+            }
+        }
+
 
     }
 }

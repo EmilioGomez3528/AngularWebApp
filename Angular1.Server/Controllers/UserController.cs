@@ -191,6 +191,28 @@ namespace Angular1.Server.Controllers
             return Ok(result);
         }
 
+        [HttpPost("UpdateProfile")]
+        public async Task<IActionResult> UpdateProfileUser([FromBody] UpdateProfileRequest request)
+        {
+            try
+            {
+                bool result = await _userData.UpdateProfileUser(request.UserId, request.FirstName, request.LastName, request.Email , request.Username);
+
+                if (result)
+                {
+                    return Ok(new { Message = "Usuario actualizado correctamente" });
+                }
+                else
+                {
+                    return BadRequest(new { Message = "No se pudieron actualizar los datos del usuario" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex.Message}");
+            }
+        }
+
     }
 
 
@@ -223,5 +245,14 @@ namespace Angular1.Server.Controllers
         public string Email { get; set; }
         public string ProviderUserId { get; set; }
         public string Provider {  get; set; }
+    }
+
+    public class UpdateProfileRequest
+    {
+        public int UserId { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+        public string? Username { get; set; }
     }
 }
