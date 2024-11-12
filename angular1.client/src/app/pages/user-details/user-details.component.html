@@ -9,7 +9,7 @@
     <div *ngFor="let item of userData" class="organization-container">
         <h3 class="organization-name">{{ item.organizationName }}</h3>
         <div class="roles">
-            <p class="role-item">Rol(es):</p>
+            <p class="role-item">Roles:</p>
             <ul>
                 <li *ngFor="let role of item.roles.split(',')">{{ role.trim() }}</li>
             </ul>

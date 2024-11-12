@@ -32,6 +32,7 @@ import { MSAL_INSTANCE, MsalModule, MsalService } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AuthLoaderComponent } from './shared/auth-loader/auth-loader.component';
+import { NullPlaceholderPipe } from './pipes/null-placeholder.pipe';
 
 
 export function MSALInstanceFactory(): IPublicClientApplication{
@@ -56,7 +57,8 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     OrphanUsersComponent,
     UserDetailsComponent,
     AddUsersComponent,
-    AuthLoaderComponent
+    AuthLoaderComponent,
+    NullPlaceholderPipe
   ],
   imports: [
     BrowserModule, HttpClientModule,

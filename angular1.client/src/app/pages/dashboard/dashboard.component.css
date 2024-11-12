@@ -125,7 +125,7 @@
 /* Contenedor del datatable sin restricción de altura */
 .datatable-container {
   border-radius: 10px; /* Bordes redondeados */
-  border: 1px solid #ccc; /* Borde sutil */
+  border: 1px solid #ffffff; /* Borde sutil */
   padding: 10px;
   background-color: #ffffff; /* Fondo del datatable */
   margin-bottom: 20px; /* Espacio inferior para que el contenido no toque el paginador */

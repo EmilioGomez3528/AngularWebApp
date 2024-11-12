@@ -52,34 +52,36 @@ export class OrphanUsersComponent implements OnInit{
       },
       (error) => {
         console.error('Error al obtener roles y organizaciones', error);
-        const swalWithBootstrapButtons = Swal.mixin({
-          customClass: {
-            confirmButton: "btn btn-success",
-            cancelButton: "btn btn-danger"
-          },
-          buttonsStyling: true
-        });
-        swalWithBootstrapButtons.fire({
-          title: "¿Deseas agregar a una organizacion?",
-          text: "Este usuario no posee una organizacion!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Si, editar!",
-          cancelButtonText: "No, cancelar!",
-          reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.router.navigate (['/', 'addUsers', userId]);
-          } else if (
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire({
-              title: "Cancelado",
-              text: "El usuario continuará sin organizacion",
-              icon: "error"
-            });
-          }
-        });
+        this.router.navigate (['/', 'addUsers', userId]);
+        //ALERTA 
+        // const swalWithBootstrapButtons = Swal.mixin({
+        //   customClass: {
+        //     confirmButton: "btn btn-success",
+        //     cancelButton: "btn btn-danger"
+        //   },
+        //   buttonsStyling: true
+        // });
+        // swalWithBootstrapButtons.fire({
+        //   title: "¿Deseas agregar a una organizacion?",
+        //   text: "Este usuario no posee una organizacion!",
+        //   icon: "warning",
+        //   showCancelButton: true,
+        //   confirmButtonText: "Si, editar!",
+        //   cancelButtonText: "No, cancelar!",
+        //   reverseButtons: true
+        // }).then((result) => {
+        //   if (result.isConfirmed) {
+            
+        //   } else if (
+        //     result.dismiss === Swal.DismissReason.cancel
+        //   ) {
+        //     swalWithBootstrapButtons.fire({
+        //       title: "Cancelado",
+        //       text: "El usuario continuará sin organizacion",
+        //       icon: "error"
+        //     });
+        //   }
+        // });
       }
     )
   }

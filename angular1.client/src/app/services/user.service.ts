@@ -48,9 +48,14 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl}/AddOrphanUser`, userData);
   }
 
-  //metodo para logion con microsoft y google
+  //metodo para login con microsoft y google
   OAuth(firstName: string, lastName: string, email: string, providerUserId: string, provider: string) {
     const loginData = { firstName, lastName, email, providerUserId, provider };
     return this.http.post<any>(`${this.apiUrl}/OAuth`, loginData);
+  }
+
+  updateProfileUser(userId: number, firstName: string, lastName: string, email: string, username: string) {
+    const profileData = {userId, firstName, lastName, email, username};
+    return this.http.post<any>(`${this.apiUrl}/UpdateProfile`,profileData);
   }
 }

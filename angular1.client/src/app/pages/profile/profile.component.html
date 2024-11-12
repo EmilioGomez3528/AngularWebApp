@@ -1,9 +1,5 @@
 <h4 class="section-title bi bi-person">Perfil</h4>
 
-<a routerLink="/dashboard" class="back-button">
-  <mat-icon>arrow_back</mat-icon> Back
-</a>
-
 <div class="profile-container position-relative">
   <!-- Botón de editar en la esquina superior derecha -->
   <button *ngIf="!isEditMode" (click)="enableEditMode()" class="Btn position-absolute top-0 end-0 m-3">
@@ -19,8 +15,8 @@
   </div>
   <div class="profile-details">
     <h2 *ngIf="!isEditMode">{{ userData.firstName }} {{ userData.lastName }}</h2>
-    <p *ngIf="!isEditMode"><i class="bi bi-envelope"></i> <strong>Email:</strong> {{ userData.email }}</p>
-    <p *ngIf="!isEditMode"><i class="bi bi-person"></i> <strong>Username:</strong> {{ userData.username }}</p>
+    <p *ngIf="!isEditMode"><i class="bi bi-envelope"></i> <strong></strong> {{ userData.email }}</p>
+    <p *ngIf="!isEditMode"><i class="bi bi-person"></i> <strong></strong> {{ userData.username }}</p>
     <!-- Formulario de edición -->
     <form *ngIf="isEditMode" (ngSubmit)="onSubmit()" class="edit-form">
       <label for="firstName">Nombre:</label>
@@ -28,9 +24,9 @@
       <label for="lastName">Apellido:</label>
       <input type="text" id="lastName" [(ngModel)]="editData.lastName" name="lastName" class="form-control mb-2" required />
       <label for="email">Email:</label>
-      <input type="email" id="email" [(ngModel)]="editData.email" name="email" class="form-control mb-2" required />
+      <input [disabled]="isOauthUser === userData.isOauth" type="email" id="email" [(ngModel)]="editData.email" name="email" class="form-control mb-2" />
       <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="editData.username" name="username" class="form-control mb-2" required />
+      <input [disabled]="isOauthUser === userData.isOauth" type="text" id="username" [(ngModel)]="editData.username" name="username" class="form-control mb-2" />
       <div class="d-flex justify-content-end">
         <button class="Btn-save">
           <div class="sign">
@@ -46,7 +42,7 @@
               <path d="M310.6 361.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L160 301.3 54.6 406.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L114.7 256 9.4 150.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 210.7l105.4-105.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L205.3 256l105.4 105.4z"/>
             </svg>
           </div>
-          <div class="text">Cancelar</div>
+          <div class="text" (click)="cancelEditMode()">Cancelar</div>
         </button>                       
       </div>
     </form>

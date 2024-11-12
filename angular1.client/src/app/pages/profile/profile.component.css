@@ -322,5 +322,11 @@
   margin-right: 10px; /* Agrega espacio a la derecha de cada botón */
 }
 
+/* desabilitar el input */
+.disabled {
+  color: gray;
+  pointer-events: none;
+}
+
   
 

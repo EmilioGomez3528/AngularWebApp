@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
-import Swal from 'sweetalert2'
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-browser';
 import { OAuthGoogleService } from '../../services/oauth-google.service';
+import Swal from 'sweetalert2'
 
 
 @Component({
