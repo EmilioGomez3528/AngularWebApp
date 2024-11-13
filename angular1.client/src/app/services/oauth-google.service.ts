@@ -23,7 +23,7 @@ export class OAuthGoogleService {
 
   initGoogleLogin() {
     this.oauthService.configure(config);
-    this.oauthService.setupAutomaticSilentRefresh();
+    // this.oauthService.setupAutomaticSilentRefresh();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
@@ -36,7 +36,16 @@ export class OAuthGoogleService {
   }
 
   logOutGoogle() {
-    this.oauthService.logOut()
+
+    // Abre el logout en una nueva ventana para cerrar la sesión de Google
+  const logoutWindow = window.open('https://accounts.google.com/logout', '_blank', 'width=500,height=600');
+  
+  // Opcional: Cierra la ventana después de unos segundos
+  setTimeout(() => logoutWindow?.close(), 1000);
+  
+  // Redirige al usuario al login en tu aplicación
+  this.oauthService.logOut();
+  this.oauthService.revokeTokenAndLogout();
 
 //Fuerza el cierre de sesion de cuenta de Google
     // window.location.href = 'https://accounts.google.com/logout';
