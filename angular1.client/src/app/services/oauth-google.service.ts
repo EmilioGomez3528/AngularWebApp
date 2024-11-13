@@ -7,6 +7,9 @@ const config: AuthConfig = {
   clientId: '233689486452-ce9fmo95a1c1mp6cgtkj8g4hm8mgbh5a.apps.googleusercontent.com',
   scope: 'openid profile email',
   strictDiscoveryDocumentValidation: false,
+  customQueryParams: {
+    prompt: 'login',
+  },
 }
 
 @Injectable({
@@ -34,5 +37,8 @@ export class OAuthGoogleService {
 
   logOutGoogle() {
     this.oauthService.logOut()
+
+//Fuerza el cierre de sesion de cuenta de Google
+    // window.location.href = 'https://accounts.google.com/logout';
   }
 }
