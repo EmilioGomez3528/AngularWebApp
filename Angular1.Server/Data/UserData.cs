@@ -83,9 +83,9 @@ namespace Angular1.Server.Data
         //METODO 2 DE PROCEDIMIENTOS ALMACENADOS
 
         //METODO DE OBTENCION PARA EL STOREDPROCEDURE DE DETALLES
-        public async Task<List<User>> GetDetails()
+        public async Task<User?> GetDetails(int userid)
         {
-            var detailsList = new List<User>();
+            User? user = null;
 
             //Conexión SQL
             using (var con = new SqlConnection(conection))
@@ -95,33 +95,27 @@ namespace Angular1.Server.Data
 
 
                 //Comando SQL para ejecutar el stored procedure
-                using (SqlCommand command = new SqlCommand("gkan.Emilio_GetUsers", con))
+                using (SqlCommand command = new SqlCommand("gkan.Emilio_GetDetails", con))
                 {
+                    command.Parameters.AddWithValue("@UserId",userid);
                     command.CommandType = CommandType.StoredProcedure;
-
                     // Ejecutar el comando
-                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    using (var reader = await command.ExecuteReaderAsync())
                     {
-
-
-                        // Leer los datos devueltos por el stored procedure
-                        while (await reader.ReadAsync())
+                        if (await reader.ReadAsync())
                         {
-                            var detail = new User
+                            user = new User
                             {
-                                UserId = reader.GetInt32(0),
-                                FirstName = reader.IsDBNull(1) ? null : reader.GetString(1),
-                                LastName = reader.IsDBNull(2) ? null : reader.GetString(2),
-                                Email = reader.IsDBNull(3) ? null : reader.GetString(3),
-                                CreatedDate = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4)
+                                FirstName = reader["FirstName"] != DBNull.Value ? reader["FirstName"].ToString() : string.Empty,
+                                LastName = reader["LastName"] != DBNull.Value ? reader["lastName"].ToString() : string.Empty,
+                                Email = reader["Email"] != DBNull.Value ? reader["Email"].ToString() : string.Empty,
+                                Initials = reader["Initials"] != DBNull.Value ? reader["Initials"].ToString() : string.Empty,
                             };
-                            // Agregar el detalle a la lista
-                            detailsList.Add(detail);
                         }
                     }
                 }
             }
-            return detailsList;
+            return user;
         }
         //METODO 3 DE PROCEDIMIENTOS ALMACENADOS
 

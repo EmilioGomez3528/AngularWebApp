@@ -60,18 +60,13 @@ namespace Angular1.Server.Controllers
 
 
         [HttpGet("GetUsers")]
-        public async Task<IActionResult> GetDetails()
+        public async Task<IActionResult> GetDetails(int userId)
         {
             try
             {
-                var details = await _userData.GetDetails();
+                var user = await _userData.GetDetails(userId);
 
-                if (details == null || details.Count == 0)
-                {
-                    return NotFound("No se encontraron detalles.");
-                }
-
-                return Ok(details);
+                return Ok(user);
             }
             catch (Exception ex)
             {
