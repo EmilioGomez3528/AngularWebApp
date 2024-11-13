@@ -46,8 +46,5 @@ export class OAuthGoogleService {
   // Redirige al usuario al login en tu aplicación
   this.oauthService.logOut();
   this.oauthService.revokeTokenAndLogout();
-
-//Fuerza el cierre de sesion de cuenta de Google
-    // window.location.href = 'https://accounts.google.com/logout';
   }
 }

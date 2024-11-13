@@ -9,6 +9,7 @@ import { RolesModalComponent } from '../../shared/roles-modal/roles-modal.compon
 import { Organizations } from '../../models/organizations.model';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { first } from 'rxjs';
 
 
 
@@ -30,6 +31,7 @@ export class DashboardComponent implements OnInit {
   constructor(private userService: UserService, private dialog: MatDialog, private route: Router) { }
 
   ngOnInit(): void {
+
       this.showOrganization();
       this.showUsersByOrganization(1);
   }
@@ -53,51 +55,52 @@ export class DashboardComponent implements OnInit {
     
     this.userService.getUserRolesAndOrganizations(userId).subscribe(
       (data) => {
-        this.openRolesModal(data);
+        console.log(data)
+        this.route.navigate (['/', 'userDetails']);
+        // this.openRolesModal(data);
       },
       (error) => {
-        console.error('Error al obtener roles y organizaciones', error);
-        // Inicio Alerta
-        const swalWithBootstrapButtons = Swal.mixin({
-          customClass: {
-            confirmButton: "btn btn-success",
-            cancelButton: "btn btn-danger"
-          },
-          buttonsStyling: true
-        });
-        swalWithBootstrapButtons.fire({
-          title: "¿Deseas agregar a una organizacion?",
-          text: "Este usuario no posee una organizacion!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Si, editar!",
-          cancelButtonText: "No, cancelar!",
-          reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.route.navigate (['/', 'userDetails']);
-          } else if (
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            swalWithBootstrapButtons.fire({
-              title: "Cancelado",
-              text: "El usuario continuará sin organizacion",
-              icon: "error"
+            console.error('Error al obtener roles y organizaciones', error);
+            // Inicio Alerta
+            const swalWithBootstrapButtons = Swal.mixin({
+              customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+              },
+              buttonsStyling: true
             });
+            swalWithBootstrapButtons.fire({
+              title: "¿Deseas agregar a una organizacion?",
+              text: "Este usuario no posee una organizacion!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonText: "Si, editar!",
+              cancelButtonText: "No, cancelar!",
+              reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // this.route.navigate (['/', 'userDetails']);
+              } else if (
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+                swalWithBootstrapButtons.fire({
+                  title: "Cancelado",
+                  text: "El usuario continuará sin organizacion",
+                  icon: "error"
+                });
+              }
+            }); // Fin de alerta
           }
-        });
-        // Fin de alerta
-      }
     );
   }
 
-  //Método para mostrar modal de Roles y Organizaciones a las que pertenece un usuario
-  openRolesModal(data: any): void {
-    this.dialog.open(RolesModalComponent, {
-      width: '400px',
-      data: data
-    });
-  }
+  // //Método para mostrar modal de Roles y Organizaciones a las que pertenece un usuario
+  // openRolesModal(data: any): void {
+  //   this.dialog.open(RolesModalComponent, {
+  //     width: '400px',
+  //     data: data
+  //   });
+  // }
 
   //Metodo para cargar las organizaciones en el select
   showOrganization(): void {

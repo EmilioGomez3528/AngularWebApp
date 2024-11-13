@@ -11,9 +11,13 @@ export class UserDetailsComponent {
 
   userId: number = 0;
   userData: any;
+  userInformation: any;
+
+
   constructor( private userService: UserService, private route: ActivatedRoute ) { }
 
   ngOnInit() {
+
     this.route.params.subscribe(
       params => this.userId = params['id']
     );
@@ -25,6 +29,10 @@ export class UserDetailsComponent {
         console.log('Error');
       }
     )
+
+    this.userService.getDetails(this.userId).subscribe ( (response) => {
+      this.userInformation = response
+    })
   }
   
 }

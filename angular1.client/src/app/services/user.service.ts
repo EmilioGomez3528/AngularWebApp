@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserDetails } from '../models/user-details.model';
 import { Organizations } from '../models/organizations.model';
@@ -20,8 +20,10 @@ export class UserService {
     return this.http.post(`${this.apiUrl}/login`, loginData);
   }
 
-  getDetails(): Observable<UserDetails[]> {
-    return this.http.get<UserDetails[]>(`${this.apiUrl}/GetUsers`);
+  //metodo para obtener los detalles de usuarios en orphan user y userdetails
+  getDetails(userId: number): Observable<any> {
+    const params = new HttpParams().set('userId', userId.toString());
+    return this.http.get<UserDetails[]>(`${this.apiUrl}/GetUsers`, { params });
   }
 
   //metodo de roles y organizaciones

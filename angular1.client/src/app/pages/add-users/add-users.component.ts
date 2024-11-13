@@ -14,6 +14,7 @@ export class AddUsersComponent {
 
   userId!: number;
   userData: any;
+  userInformation: any;
   organizationList!: Organizations[];
   constructor( private userService: UserService, private route: ActivatedRoute, private authService: AuthServiceService ) { }
 
@@ -25,7 +26,12 @@ export class AddUsersComponent {
 
     this.route.params.subscribe(
       params => this.userId = params['id']
-    ); 
+    );
+    
+    this.userService.getDetails(this.userId).subscribe ( (response) => {
+      this.userInformation = response
+    })
+    
   }
 
   //Metodo para cargar las organizaciones en el select
@@ -58,6 +64,7 @@ export class AddUsersComponent {
         timer: 1500
       });
     }
-  ) 
+  )
+  
 }
 }

@@ -11,10 +11,29 @@
     background-color: #e0e0e0; /*Color de fondo*/
 }
 
+.user-name, .organization-count {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 5px;
+    color: #333;
+}
+
+.user-name {
+    margin-top: 20px;
+}
+
+.organization-count {
+    margin-top: 4px; /* Espacio entre el nombre del usuario y el conteo */
+    text-align: left; /* Alineación hacia la izquierda */
+    margin-left: 25px; /* Espacio a la izquierda */
+}
+
+
 .organization-list {
     margin: 0 20px; /* Espacio lateral */
     text-align: left;
-    padding-top: 30px; /*Espacio entre titulo y tarjeta*/
+    padding-top: 20px; /*Espacio entre titulos y tarjeta*/
 }
 
 .organization-container {
