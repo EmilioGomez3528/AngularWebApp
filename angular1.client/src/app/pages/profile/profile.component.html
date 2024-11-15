@@ -9,9 +9,10 @@
     </svg>
   </button>
 
-  <!-- Contenido restante del perfil (imagen, datos y formulario de edición) -->
   <div class="profile-image">
-    <img src="/assets/img/user2-160x160.jpg" alt="User Image" />
+    <div *ngIf="isOauthUser === userData.isOauth" class="initials">{{ userData.initials }}</div>
+    <img [src]="profilePic" alt="User Profile Image" />
+
   </div>
   <div class="profile-details">
     <h2 *ngIf="!isEditMode">{{ userData.firstName }} {{ userData.lastName }}</h2>
@@ -24,9 +25,9 @@
       <label for="lastName">Apellido:</label>
       <input type="text" id="lastName" [(ngModel)]="editData.lastName" name="lastName" class="form-control mb-2" required />
       <label for="email">Email:</label>
-      <input [disabled]="isOauthUser === userData.isOauth" type="email" id="email" [(ngModel)]="editData.email" name="email" class="form-control mb-2" />
+      <input [disabled]=" userData.isOauth === 1" type="email" id="email" [(ngModel)]="editData.email" name="email" class="form-control mb-2" />
       <label for="username">Username:</label>
-      <input [disabled]="isOauthUser === userData.isOauth" type="text" id="username" [(ngModel)]="editData.username" name="username" class="form-control mb-2" />
+      <input [disabled]="userData.isOauth === 1" type="text" id="username" [(ngModel)]="editData.username" name="username" class="form-control mb-2" />
       <div class="d-flex justify-content-end">
         <button class="Btn-save">
           <div class="sign">

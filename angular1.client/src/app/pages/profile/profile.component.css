@@ -60,6 +60,22 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .initials {
+    font-family: 'Rubik', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #ff0404; /* Color de fondo */
+    border-radius: 50%; /* Forma de círculo */
+    color: white; /* Color de las iniciales */
+    font-size: 85px; /* Tamaño de las iniciales */
+    font-weight: bold;
+  }
+
+
   
   .profile-details {
     font-family: 'Aileron', sans-serif;

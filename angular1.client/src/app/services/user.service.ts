@@ -5,7 +5,6 @@ import { UserDetails } from '../models/user-details.model';
 import { Organizations } from '../models/organizations.model';
 
 
-
 @Injectable({
   providedIn: 'root'
 })

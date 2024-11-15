@@ -45,3 +45,138 @@
     margin-top: 20px;
     color: #333;
 }
+
+/* BOTON DE CANCELAR */
+.noselect {
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: #e62222;
+   }
+   
+   .noselect, button span {
+    transition: 200ms;
+   }
+   
+   .noselect .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+   }
+   
+   .noselect .icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(110px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   
+   .noselect svg {
+    width: 15px;
+    fill: #eee;
+   }
+   
+   .noselect:hover {
+    background: #ff3636;
+   }
+   
+   .noselect:hover .text {
+    color: transparent;
+   }
+   
+   .noselect:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+   }
+   
+   .noselect:focus {
+    outline: none;
+   }
+   
+   .noselect:active .icon svg {
+    transform: scale(0.8);
+   }
+
+   /* BOTON DE AGREGAR */
+   /* Adaptación de estilo para botón verde con palomita */
+
+.add {
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: #28a745; /* Color verde */
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+  
+  .add, button span {
+    transition: 200ms;
+  }
+  
+  .add .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .add .icon {
+    position: absolute;
+    border-left: 1px solid #218838; /* Color verde oscuro para borde */
+    transform: translateX(110px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add svg {
+    width: 20px;
+    fill: #eee; /* Color de la palomita */
+  }
+  
+  .add:hover {
+    background: #218838; /* Verde más oscuro para hover */
+  }
+  
+  .add:hover .text {
+    color: transparent;
+  }
+  
+  .add:hover .icon {
+    width: 150px;
+    transform: translateX(0);
+  }
+  
+  .add:focus {
+    outline: none;
+  }
+  
+  .add:active .icon svg {
+    transform: scale(0.9);
+  }
+  
+
+  .button-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    gap: 20px; /* Espacio entre botones */
+    margin-top: 20px; /* Separación superior */
+  }
+  

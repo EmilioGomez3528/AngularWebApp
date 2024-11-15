@@ -1,4 +1,4 @@
-<h4 class="section-title bi bi-person-add">     Agregar usuario</h4>
+<h4 class="section-title bi bi-person-add">Agregar usuario</h4>
 
 <p class="user">Usuario: {{ userInformation?.firstName }} {{ userInformation?.lastName }}</p>
 <p class="user">Email: {{ userInformation?.email | nullPlaceholder }}</p>
@@ -7,13 +7,26 @@
     <mat-icon>arrow_back</mat-icon> Back
 </a>
 
+<h4 appearance="fill" class="select-field">
+    Selecciona la organización a la que deseas agregar a {{ userInformation?.firstName }}
+</h4>
 
-<h4 appearance="fill" class="select-field">Selecciona la organización a la que deseas agregar a {{userInformation?.firstName}}</h4>
-            <mat-form-field appearance="fill" class="select-field">
-                <mat-label>Organización</mat-label>
-                <mat-select (selectionChange)="addUser($event.value)" >
-                    <mat-option *ngFor="let org of organizationList" [value]="org.organizationId">
-                        {{ org.organizationName }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+<mat-form-field appearance="fill" class="select-field">
+    <mat-label>Organización</mat-label>
+    <mat-select (selectionChange)="onOrganizationSelect($event.value)">
+        <mat-option *ngFor="let org of organizationList" [value]="org">
+            {{ org.organizationName }}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<!-- Siempre visibles -->
+<div class="selected-organization-info">
+    <p *ngIf="selectedOrganization">
+        Organización seleccionada: {{ selectedOrganization.organizationName }}
+    </p>
+    <div class="button-container">
+        <button class="add" (click)="confirmAddUser()"><span class="text">Agregar</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 6.707l-11.558 11.586-4.991-5.003-2.007 2.009 7.001 7.001 13.565-13.586-2.01-2.007z"></path></svg></span></button>
+        <button class="noselect" (click)="cancelSelection()"><span class="text">Cancelar</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
+    </div>
+</div>

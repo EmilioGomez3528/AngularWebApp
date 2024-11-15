@@ -4,6 +4,10 @@ import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
 import { OAuthGoogleService } from '../../services/oauth-google.service';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { MsalService } from '@azure/msal-angular';
+import { catchError, map, switchMap, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -14,14 +18,17 @@ export class ProfileComponent {
   userData: any;
   editData: any;  // Variable para almacenar datos editables
   isEditMode = false; // Controla si estamos en modo de edición
-  isOauthUser = 1 ;
+  isOauthUser = 0;
+  profilePic?:SafeUrl | null = null;
 
 
-
-  constructor(private authService: AuthServiceService, private userService: UserService, private router: Router, private googleService: OAuthGoogleService) {
+  constructor(private authService: AuthServiceService, private userService: UserService, private router: Router, private googleService: OAuthGoogleService, private msalService: MsalService, private http: HttpClient, private sanitizer: DomSanitizer) {
     // Obtenemos los datos del usuario al inicializar el componente
     this.userData = this.authService.getUser();
     this.editData = { ...this.userData }; // Inicializamos editData con los datos actuales del usuario
+
+      this.getUserProfileImage();
+
 
   }
 
@@ -90,4 +97,43 @@ export class ProfileComponent {
   cancelEditMode() {
     this.isEditMode = false; // Salir del modo de edición sin guardar cambios
   }
+
+
+  getUserProfileImage(): void {
+    const account = this.msalService.instance.getActiveAccount();
+    if (!account) {
+      console.error("No user is currently logged in.");
+      return;
+    }
+  
+    this.msalService.acquireTokenSilent({
+      account: account,
+      scopes: ['User.Read']
+    }).subscribe(
+      tokenResponse => {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${tokenResponse.accessToken}`
+        });
+  
+        this.http.get('https://graph.microsoft.com/v1.0/me/photo/$value', {
+          headers: headers,
+          responseType: 'blob'
+        }).subscribe(
+          (response: Blob) => {
+            const objectURL = URL.createObjectURL(response);
+            this.profilePic = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+          },
+          error => {
+            console.error('Error fetching profile image:', error);
+          }
+        );
+      },
+      error => {
+        console.error('Error acquiring token:', error);
+      }
+    );
+  }
+  
+
+
 }

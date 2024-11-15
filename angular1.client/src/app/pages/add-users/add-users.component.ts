@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { Organizations } from '../../models/organizations.model';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-users',
   templateUrl: './add-users.component.html',
-  styleUrl: './add-users.component.css'
+  styleUrls: ['./add-users.component.css']
 })
 export class AddUsersComponent {
 
@@ -16,11 +16,16 @@ export class AddUsersComponent {
   userData: any;
   userInformation: any;
   organizationList!: Organizations[];
-  constructor( private userService: UserService, private route: ActivatedRoute, private authService: AuthServiceService ) { }
+  selectedOrganization: Organizations | null = null;
+
+  constructor(
+    private userService: UserService, 
+    private route: ActivatedRoute, 
+    private authService: AuthServiceService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-
-
     this.showOrganization();
     this.userData = this.authService.getUser();
 
@@ -28,43 +33,54 @@ export class AddUsersComponent {
       params => this.userId = params['id']
     );
     
-    this.userService.getDetails(this.userId).subscribe ( (response) => {
-      this.userInformation = response
-    })
-    
+    this.userService.getDetails(this.userId).subscribe((response) => {
+      this.userInformation = response;
+    });
   }
 
-  //Metodo para cargar las organizaciones en el select
+  // Método para cargar las organizaciones en el select
   showOrganization(): void {
     this.userService.getOrganizations().subscribe(
       (orgs: Organizations[]) => {
         this.organizationList = orgs;
-      },
+      }
     );
   }
 
-  //metodo para ageragr el usuario a una organizacion
-  addUser(organizationId: number) {
-  this.userService.addOrphanUserToOrg(this.userId, organizationId).subscribe ( 
-  (response) => {
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Usuario agregado correctamente",
-      showConfirmButton: false,
-      timer: 1500
-    });
-  },
-    (error) => {
-      Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "El usuario no se agregó",
-        showConfirmButton: false,
-        timer: 1500
-      });
+  // Método para manejar la selección de una organización
+  onOrganizationSelect(org: Organizations): void {
+    this.selectedOrganization = org;
+  }
+
+  // Método para confirmar la acción de agregar usuario a la organización seleccionada
+  confirmAddUser(): void {
+    if (this.selectedOrganization && this.userId) {
+      this.userService.addOrphanUserToOrg(this.userId, this.selectedOrganization.organizationId).subscribe(
+        (response) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Usuario agregado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.router.navigate(['/dashboard']);
+        },
+        (error) => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'El usuario no se agregó',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      );
     }
-  )
-  
-}
+  }
+
+  // Método para cancelar la selección
+  cancelSelection(): void {
+    this.selectedOrganization = null;
+  }
 }
