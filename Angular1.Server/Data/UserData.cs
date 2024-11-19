@@ -367,6 +367,52 @@ namespace Angular1.Server.Data
             }
         }
 
+        //Metodo 10 DE PROCEDIMIENTOS ALMACENADOS
+
+        //METODO DE VERIFICACION DE DATOS DE PERFIL DE USUARIO
+
+        public async Task<(bool IsUserNameTaken, bool IsEmailTaken)> ValidateUserProfile(int userId, string Username, string Email)
+        {
+            using (var con = new SqlConnection(conection))
+            {
+                // Abrir la conexión
+                await con.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("gkan.Emilio_ValidateUserProfile", con))
+                {
+                    // Definición de tipo de comando como Stored Procedure
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Definición de parámetros de entrada
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                    cmd.Parameters.AddWithValue("@UserName", Username);
+                    cmd.Parameters.AddWithValue("@Email", Email);
+
+                    // Definición de parámetros de salida
+                    var isUserNameTakenParam = new SqlParameter("@IsUserNameTaken", SqlDbType.Bit)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(isUserNameTakenParam);
+
+                    var isEmailTakenParam = new SqlParameter("@IsEmailTaken", SqlDbType.Bit)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(isEmailTakenParam);
+
+                    // Ejecución del Stored Procedure
+                    await cmd.ExecuteNonQueryAsync();
+
+                    // Recuperar los valores de los parámetros de salida
+                    bool isUserNameTaken = isUserNameTakenParam.Value != DBNull.Value && (bool)isUserNameTakenParam.Value;
+                    bool isEmailTaken = isEmailTakenParam.Value != DBNull.Value && (bool)isEmailTakenParam.Value;
+
+                    return (isUserNameTaken, isEmailTaken);
+                }
+            }
+        }
+
 
     }
 }

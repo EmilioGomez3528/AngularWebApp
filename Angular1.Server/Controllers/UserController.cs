@@ -208,6 +208,31 @@ namespace Angular1.Server.Controllers
             }
         }
 
+        [HttpPost("ValidateUserProfile")]
+        public async Task<IActionResult> ValidateUserProfile([FromBody] ValidateProfileRequest request)
+        {
+            try
+            {
+                if (request == null || request.UserId <= 0)
+                {
+                    return BadRequest(new { Message = "Datos inválidos para la validación" });
+                }
+
+                var (isUserNameTaken, isEmailTaken) = await _userData.ValidateUserProfile(request.UserId, request.Username, request.Email);
+
+                return Ok(new
+                {
+                    Message = "Validación completada",
+                    IsUserNameTaken = isUserNameTaken,
+                    IsEmailTaken = isEmailTaken
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error del servidor: {ex.Message}");
+            }
+        }
+
     }
 
 
@@ -250,4 +275,13 @@ namespace Angular1.Server.Controllers
         public string? Email { get; set; }
         public string? Username { get; set; }
     }
+
+    public class ValidateProfileRequest
+    {
+        public int UserId { get; set; }
+        public string? Username { get; set; }
+        public string? Email { get; set; }
+    }
+
+
 }
