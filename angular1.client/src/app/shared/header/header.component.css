@@ -46,3 +46,81 @@
 .navbar:hover {
   background-color: rgba(255, 255, 255, 0.9); /* Cambiar el color de fondo al pasar el mouse */
 }
+
+
+
+.profile-container {
+  display: flex; /* Alinea los elementos horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  gap: 8px; /* Espaciado entre la imagen y el texto */
+}
+
+
+.profile-image-header {
+  flex-shrink: 0;
+  width: 35px; /* Tamaño del circulo de la imagen */
+  height: 35px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image-header img {
+  width: 100%; /* Tamaño de la imagen */
+  height: 100%;
+  object-fit: cover;
+}
+
+.initials-header {
+  font-family: 'Rubik', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #0cbd3e; /* Color de fondo */
+  border-radius: 50%; /* Forma de círculo */
+  color: white; /* Color de las iniciales */
+  font-size: 10px; /* Tamaño de las iniciales */
+  font-weight: bold;
+}
+
+
+.profile-image-dropdown {
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px; /* Ajusta según el tamaño deseado */
+  height: 80px; /* Debe ser igual al width para que sea un círculo */
+  background-color: green; /* Color del círculo */
+  border-radius: 50%; /* Hace que el div sea circular */
+  margin: 0 auto; /* Centra el círculo dentro del contenedor padre */
+  color: white; /* Color del texto dentro del círculo */
+  font-weight: bold; /* Estiliza el texto */
+  font-size: 1.5rem; /* Ajusta el tamaño del texto */
+  text-align: center; /* Centra el texto horizontalmente */
+  margin-top: 10px; /* Espaciado entre el borde de arriba y el circulo */
+}
+
+.profile-image-dropdown img {
+  width: 100%; /* Tamaño de la imagen */
+  height: 100%;
+  object-fit: cover;
+}
+
+.initials-dropdown {
+  font-family: 'Rubik', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #0cbd3e; /* Color de fondo */
+  border-radius: 50%; /* Forma de círculo */
+  color: white; /* Color de las iniciales */
+  font-size: 35px; /* Tamaño de las iniciales */
+  font-weight: bold;
+}

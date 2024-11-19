@@ -1,9 +1,7 @@
 ﻿using Angular1.Server.Models;
-using Azure;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using System.Data.SqlClient;
 
 
 namespace Angular1.Server.Data

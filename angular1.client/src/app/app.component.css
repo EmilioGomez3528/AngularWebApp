@@ -13,10 +13,13 @@ table {
     margin: 0 auto;
 }
 
-.mat-sidenav-container {
-    height: 100%;
-    width: 100%;
+mat-sidenav-container {
+  border: none;  /* Elimina cualquier borde */
+  margin: 0;  /* Elimina cualquier margen */
+  padding: 0;  /* Elimina cualquier padding */
+  height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
 }
+
 
 .mat-sidenav-content {
     padding: 0;
@@ -67,5 +70,12 @@ body, html {
   
   .sidenav-item a:hover {
     color: #1976d2; /* Change text color on hover */
+  }
+  
+  router-outlet {
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    height: 100%; /* Asegura que ocupe toda la altura */
   }
   

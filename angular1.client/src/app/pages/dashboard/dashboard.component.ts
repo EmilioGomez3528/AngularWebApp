@@ -5,11 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../../services/user.service';
 import { UserDetails } from '../../models/user-details.model';
-import { RolesModalComponent } from '../../shared/roles-modal/roles-modal.component';
 import { Organizations } from '../../models/organizations.model';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
-import { first } from 'rxjs';
 
 
 
@@ -24,6 +22,7 @@ export class DashboardComponent implements OnInit {
   dataSource!: MatTableDataSource<UserDetails>;
   organizationList!: Organizations[];
   usersList: MatTableDataSource<any> = new MatTableDataSource();
+  selectedOrganization?: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -94,14 +93,6 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  // //Método para mostrar modal de Roles y Organizaciones a las que pertenece un usuario
-  // openRolesModal(data: any): void {
-  //   this.dialog.open(RolesModalComponent, {
-  //     width: '400px',
-  //     data: data
-  //   });
-  // }
-
   //Metodo para cargar las organizaciones en el select
   showOrganization(): void {
     this.userService.getOrganizations().subscribe(
@@ -110,6 +101,8 @@ export class DashboardComponent implements OnInit {
       },
     );
   }
+
+
 
   // Método para cargar los usuarios según la organización seleccionada
   showUsersByOrganization(organizationId: number): void {
@@ -123,6 +116,10 @@ export class DashboardComponent implements OnInit {
         console.error("Error al obtener usuarios", error);
       }
     );
+
+    const selectedOrg = this.organizationList.find(org => org.organizationId === organizationId);
+    this.selectedOrganization = selectedOrg ? selectedOrg.organizationName : 'Ninguna';
   }
+
 
 }

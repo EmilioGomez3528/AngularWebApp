@@ -32,7 +32,6 @@ import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-b
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AuthLoaderComponent } from './shared/auth-loader/auth-loader.component';
 import { NullPlaceholderPipe } from './pipes/null-placeholder.pipe';
-// import { AuthPromptInterceptor } from './interceptors/auth-prompt.interceptor';
 
 
 export function MSALInstanceFactory(): IPublicClientApplication{
@@ -76,11 +75,6 @@ export function MSALInstanceFactory(): IPublicClientApplication{
       provide: MSAL_INSTANCE,
       useFactory: MSALInstanceFactory,
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthPromptInterceptor,
-    //   multi: true,
-    // },
     MsalService,
     provideAnimationsAsync()
   ],

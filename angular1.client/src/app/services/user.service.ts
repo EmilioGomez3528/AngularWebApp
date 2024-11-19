@@ -54,9 +54,15 @@ export class UserService {
     const loginData = { firstName, lastName, email, providerUserId, provider };
     return this.http.post<any>(`${this.apiUrl}/OAuth`, loginData);
   }
-
+  // metodo para actualizar datos del perfil de usuario
   updateProfileUser(userId: number, firstName: string, lastName: string, email: string, username: string) {
     const profileData = {userId, firstName, lastName, email, username};
     return this.http.post<any>(`${this.apiUrl}/UpdateProfile`,profileData);
   }
+  // metodo para validar que los nombres de usuario e Email no se dupliquen
+  validateUserProfile(userId: number, username: string, email: string) {
+    const profileData = {userId, username, email}
+    return this.http.post<any>(`${this.apiUrl}/ValidateUserProfile`, profileData);
+  }
+  
 }

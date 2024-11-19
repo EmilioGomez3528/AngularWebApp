@@ -119,7 +119,7 @@
   
   /* Colores de fondo alternados para las filas */
   table tr:nth-child(even) {
-    background-color: #ffe2e2; /* Color para las filas pares */
+    background-color: #e7f3ff; /* Color para las filas pares */
   }
   
   table tr:nth-child(odd) {

@@ -23,7 +23,7 @@
     <ul class="navbar-nav ms-auto">
 
       
-        <b class="header-title">Skillify</b>
+
 
       <li class="nav-item dropdown user-menu">
         <a
@@ -31,23 +31,28 @@
           class="nav-link dropdown-toggle"
           data-bs-toggle="dropdown"
         >
-        <!-- Imagen a primera vista -->
-          <img
-            src="/assets/img/user2-160x160.jpg"
-            class="user-image rounded-circle shadow"
-            alt="User Image"
-          />
+      
+        <div class="profile-container d-flex align-items-center">
+          <!-- Titulo de la app -->
+          <b class="header-title">Skillify</b>
+          <!-- Imagen de usuario -->
+          <div class="profile-image-header">
+            <div  class="initials-header">{{ userData.initials }}</div>
+          </div>
+          <!-- Nombre de usuario -->
           <span class="d-none d-md-inline">{{userData.username}}</span>
+        </div>
+
         </a>
+
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
           <!-- User image -->
           <li class="user-header text-bg-primary">
             <!-- Imagen dentro del contenedor de datos -->
-            <img
-              src="/assets/img/user2-160x160.jpg"
-              class="rounded-circle shadow"
-              alt="User Image"
-            />
+            <div class="profile-image-dropdown">
+              <div  class="initials-dropdown">{{ userData.initials }}</div>
+            </div>
+
             <p>
               {{userData.firstName}} {{userData.lastName}}
               <small>{{userData.email}}</small>

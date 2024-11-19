@@ -48,16 +48,6 @@ export class HeaderComponent {
     
         // Refresca el estado de autenticación sin redirigir
         this.router.navigate(['/login']);
-
-    // Limpia localStorage basado en patrones
-    // patterns.forEach(pattern => {
-    //     for (let i = localStorage.length - 1; i >= 0; i--) {
-    //         const key = localStorage.key(i);
-    //         if (key && key.includes(pattern)) {
-    //             localStorage.removeItem(key);
-    //         }
-    //     }
-    // });
 }
 
 

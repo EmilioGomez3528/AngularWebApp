@@ -82,5 +82,8 @@ export class AddUsersComponent {
   // Método para cancelar la selección
   cancelSelection(): void {
     this.selectedOrganization = null;
+    if (this.selectedOrganization == null) {
+      this.router.navigate(['/orphanUsers']);
+    }
   }
 }
