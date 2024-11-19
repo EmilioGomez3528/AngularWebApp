@@ -28,7 +28,7 @@ namespace Angular1.Server.Controllers
             }
 
 
-            User user = await _userData.Get(loginRequest.Username) /*, loginRequest.Password)*/;
+            User user = await _userData.Get(loginRequest.Username);
 
             if (user == null)
             {
@@ -51,7 +51,7 @@ namespace Angular1.Server.Controllers
                 else
                 {
                     Console.WriteLine("The password = " + passwordEncrypted);
-                    //disparar alerta, usuario incorrecto
+                    //usuario incorrecto
                     return Unauthorized("Los password no corresponden");
 
                 }
@@ -234,54 +234,5 @@ namespace Angular1.Server.Controllers
         }
 
     }
-
-
-    public class LoginRequest
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public bool IsLocal { get; set; }
-    }
-
-    public class UserRequest
-    {
-        public int userId { get; set; }
-    }
-
-    public class OrganizationRequest
-    {
-        public int organizationId { get; set; }
-    }
-
-    public class AddUserToOrganizationRequest
-    {
-        public int UserId { get; set; }
-        public int OrganizationId { get; set; }
-    }
-    public class OAuthLoginRequest
-    {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string ProviderUserId { get; set; }
-        public string Provider {  get; set; }
-    }
-
-    public class UpdateProfileRequest
-    {
-        public int UserId { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public string? Email { get; set; }
-        public string? Username { get; set; }
-    }
-
-    public class ValidateProfileRequest
-    {
-        public int UserId { get; set; }
-        public string? Username { get; set; }
-        public string? Email { get; set; }
-    }
-
 
 }

@@ -19,7 +19,7 @@ namespace Angular1.Server.Data
         //METODO 1 DE PROCEDIMIENTOS ALMACENADOS
 
         //DECLARACION DE PARAMETROS PARA EL STOREDPROCEDURE DE LOGIN
-        public async Task<User?> Get(string username/*, string password*/)
+        public async Task<User?> Get(string username)
         {
             User? user = null;
 
@@ -29,7 +29,6 @@ namespace Angular1.Server.Data
                 SqlCommand cmd = new SqlCommand("gkan.Emilio_ValidateUsers", con);
                 //PARAMETROS DE ENTRADA DEL STORED
                 cmd.Parameters.AddWithValue("@Username", username);
-                //cmd.Parameters.AddWithValue("@Password", password);
 
                 // PARÁMETRO DE SALIDA
                 SqlParameter UserIdParam = new SqlParameter("@UserId", SqlDbType.Int)
@@ -412,7 +411,5 @@ namespace Angular1.Server.Data
                 }
             }
         }
-
-
     }
 }
