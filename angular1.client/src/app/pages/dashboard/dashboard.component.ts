@@ -34,7 +34,8 @@ export class DashboardComponent implements OnInit {
       this.showOrganization();
       this.showUsersByOrganization(1);
   }
-  // Filtro para la tabla
+
+  // Filtro de registros para la tabla
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.usersList.filter = filterValue.trim().toLowerCase();
@@ -46,7 +47,7 @@ export class DashboardComponent implements OnInit {
 
   //Método para obtener Roles y Organizaciones de un usuario
   viewUserRoles(userId: number): void {
-    
+    //verificacion que el userid no sea nulo o este vacio
     if (!userId) {
       console.error("El userId es nulo o indefinido");
       return;
@@ -54,41 +55,17 @@ export class DashboardComponent implements OnInit {
     
     this.userService.getUserRolesAndOrganizations(userId).subscribe(
       (data) => {
-        console.log(data)
+        //Si el valor no es nulo redirige a la vista de detalles
         this.route.navigate (['/', 'userDetails']);
-        // this.openRolesModal(data);
       },
       (error) => {
+        //Si existe un error muestra mensaje de error
             console.error('Error al obtener roles y organizaciones', error);
-            // Inicio Alerta
-            const swalWithBootstrapButtons = Swal.mixin({
-              customClass: {
-                confirmButton: "btn btn-success",
-                cancelButton: "btn btn-danger"
-              },
-              buttonsStyling: true
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No existen detalles del usuario!"
             });
-            swalWithBootstrapButtons.fire({
-              title: "¿Deseas agregar a una organizacion?",
-              text: "Este usuario no posee una organizacion!",
-              icon: "warning",
-              showCancelButton: true,
-              confirmButtonText: "Si, editar!",
-              cancelButtonText: "No, cancelar!",
-              reverseButtons: true
-            }).then((result) => {
-              if (result.isConfirmed) {
-                // this.route.navigate (['/', 'userDetails']);
-              } else if (
-                result.dismiss === Swal.DismissReason.cancel
-              ) {
-                swalWithBootstrapButtons.fire({
-                  title: "Cancelado",
-                  text: "El usuario continuará sin organizacion",
-                  icon: "error"
-                });
-              }
-            }); // Fin de alerta
           }
     );
   }
@@ -117,6 +94,7 @@ export class DashboardComponent implements OnInit {
       }
     );
 
+    //Asigna un valor a organizationName
     const selectedOrg = this.organizationList.find(org => org.organizationId === organizationId);
     this.selectedOrganization = selectedOrg ? selectedOrg.organizationName : 'Ninguna';
   }

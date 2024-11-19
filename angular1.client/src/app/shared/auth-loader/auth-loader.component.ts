@@ -41,25 +41,34 @@ export class AuthLoaderComponent implements OnInit {
 
       const [firstName = '', lastName = ''] = this.name?.split(' ') || [];
 
-      console.log("First Name:", firstName);
-      console.log("Last Name:", lastName);
-      console.log("Correo:", this.email);
-      console.log("Sub:", this.sub);
-      console.log("Provider:", this.provider)
-      console.log(data)
-
       if (this.email && this.sub) {
         this.userService.OAuth(firstName, lastName, this.email, this.sub, this.provider).subscribe(
           (authResponse) => {
-            console.log("Respuesta OAuth:", authResponse);
             var username = this.email || "";
-            this.userService.login(username, "", false).subscribe( (loginResponse) => {
-              this.authService.setLoginStatus(loginResponse);
-              this.router.navigate(['/', 'dashboard']);
-            })
-          },
+            this.userService.login(username, "", false).subscribe( 
+              (loginResponse) => {
+                this.authService.setLoginStatus(loginResponse);
+                this.router.navigate(['/', 'dashboard']);
+
+                // alerta de inicio de sesion correcto
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top",
+                  showConfirmButton: false,
+                  timer: 3000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  }
+                });
+                Toast.fire({
+                  icon: "success",
+                  title: "Inicio de sesion correcto"
+                });//Fin de alerta
+              })
+            },
           (authError) => {
-            console.error("Error en la autenticación", authError);
             this.errorMessage = 'Autenticación fallida. Por favor, intente de nuevo.';
             Swal.fire({
               icon: "error",

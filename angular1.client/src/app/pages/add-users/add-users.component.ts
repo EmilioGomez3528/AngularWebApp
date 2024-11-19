@@ -25,15 +25,17 @@ export class AddUsersComponent {
     private router: Router
   ) { }
 
+  //Metodo que se ejecuta al cargar la pagina
   ngOnInit() {
-    this.showOrganization();
-    this.userData = this.authService.getUser();
-
+    this.showOrganization(); //Cargar las organizaciones en el select
+    this.userData = this.authService.getUser();//Obtencion de datos del usuario
+    //Envio de parametros por la URL
     this.route.params.subscribe(
       params => this.userId = params['id']
     );
-    
-    this.userService.getDetails(this.userId).subscribe((response) => {
+    //Obtencion de datos del usuario seleccionado
+    this.userService.getDetails(this.userId).subscribe(
+      (response) => {
       this.userInformation = response;
     });
   }
@@ -83,6 +85,7 @@ export class AddUsersComponent {
   cancelSelection(): void {
     this.selectedOrganization = null;
     if (this.selectedOrganization == null) {
+      //Redireccion hacia compoenente de orphan users
       this.router.navigate(['/orphanUsers']);
     }
   }

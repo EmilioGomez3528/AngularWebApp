@@ -30,12 +30,10 @@ export class HeaderComponent {
   signOut() {
     // Remueve el userId específico si existe
     sessionStorage.removeItem('userId');
-    
-
-      this.googleService.logOutGoogle();
+    //Cierre de siosion de Google
+    this.googleService.logOutGoogle();
     // Define patrones de MSAL y otros elementos de autenticación que desees eliminar
     const patterns = ["00000000-0000-0000", "msal.", "Microsoft", "login.microsoftonline"];
-
     // Limpia sessionStorage basado en patrones
     patterns.forEach(pattern => {
       for (let i = sessionStorage.length - 1; i >= 0; i--) {
@@ -45,7 +43,6 @@ export class HeaderComponent {
           }
       }
   });
-    
         // Refresca el estado de autenticación sin redirigir
         this.router.navigate(['/login']);
 }
@@ -62,6 +59,5 @@ export class HeaderComponent {
   users(){
     this.router.navigate(['/dashboard'])
   }
-
 
 }

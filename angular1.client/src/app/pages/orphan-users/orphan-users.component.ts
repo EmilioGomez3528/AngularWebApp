@@ -41,6 +41,7 @@ export class OrphanUsersComponent implements OnInit{
 
   viewUserRoles(userId: number): void {
 
+    //Verficacion del id del usuario
     if (!userId){
       console.error("El id del usuario es nulo o indefinido");
       return;
@@ -48,40 +49,11 @@ export class OrphanUsersComponent implements OnInit{
 
     this.userService.getUserRolesAndOrganizations(userId).subscribe(
       (data) => {
-        this.openRolesModal(data);
+        console.log(data)
       },
       (error) => {
-        console.error('Error al obtener roles y organizaciones', error);
+        //Redireccion al componente para agregar usuarios huerfanos a una organizacion
         this.router.navigate (['/', 'addUsers', userId]);
-        //ALERTA 
-        // const swalWithBootstrapButtons = Swal.mixin({
-        //   customClass: {
-        //     confirmButton: "btn btn-success",
-        //     cancelButton: "btn btn-danger"
-        //   },
-        //   buttonsStyling: true
-        // });
-        // swalWithBootstrapButtons.fire({
-        //   title: "¿Deseas agregar a una organizacion?",
-        //   text: "Este usuario no posee una organizacion!",
-        //   icon: "warning",
-        //   showCancelButton: true,
-        //   confirmButtonText: "Si, editar!",
-        //   cancelButtonText: "No, cancelar!",
-        //   reverseButtons: true
-        // }).then((result) => {
-        //   if (result.isConfirmed) {
-            
-        //   } else if (
-        //     result.dismiss === Swal.DismissReason.cancel
-        //   ) {
-        //     swalWithBootstrapButtons.fire({
-        //       title: "Cancelado",
-        //       text: "El usuario continuará sin organizacion",
-        //       icon: "error"
-        //     });
-        //   }
-        // });
       }
     )
   }

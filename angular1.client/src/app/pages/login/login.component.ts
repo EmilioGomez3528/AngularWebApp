@@ -25,7 +25,12 @@ export class LoginComponent {
   initials?: string;
   IsLocal: Boolean = false;
 
-  constructor (private userService: UserService, private authService: AuthServiceService , private router: Router, private msalService: MsalService, private googleService: OAuthGoogleService) { 
+  constructor (
+    private userService: UserService, 
+    private authService: AuthServiceService , 
+    private router: Router, 
+    private msalService: MsalService, 
+    private googleService: OAuthGoogleService) { 
     msalService.initialize().subscribe(result => { console.log(result)  })
   }
 
@@ -34,8 +39,7 @@ export class LoginComponent {
   onSubmit() {
     this.userService.login(this.username, this.password, true).subscribe(
       (response) => {
-        // const userID = response.userId; //Obtiene el valor de ID del objeto
-        console.log(response)
+        //Llamada al metodo de inicio de sesion
         this.authService.setLoginStatus(response); 
         this.router.navigate (['/', 'dashboard']);//Redirige a dashboard si los datos son correctos
 
@@ -95,25 +99,34 @@ export class LoginComponent {
           
 
           const [firstName = '', lastName = ''] = this.name?.split(' ') || [];
-
-          console.log("First Name:", firstName);
-          console.log("Last Name:", lastName);
-          console.log("Correo:", this.preferredUsername);
-          console.log("Sub:", this.providerId);
-          console.log("Provider:", this.provider);
-          console.log( "Datos:", claims) 
-
           if (this.preferredUsername && this.providerId) {
             this.userService.OAuth(firstName, lastName, this.preferredUsername, this.providerId, this.provider).subscribe(
               //RESPUESTA DEL METODO OAuth
               (authResponse) => {
-                console.log("Respuesta OAuth:", authResponse)
                 var username = this.preferredUsername || "";
                 this.userService.login(username, "" , false).subscribe ( 
                   (loginResponse) => {
-                    console.log("Respuesta de autenticacion:", loginResponse)
+                  //Lllamada al metodo de inicio de sesion
                   this.authService.setLoginStatus(loginResponse);
                   this.router.navigate(['/', 'dashboard']);
+
+                  // alerta de inicio de sesion correcto
+                  const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.onmouseenter = Swal.stopTimer;
+                      toast.onmouseleave = Swal.resumeTimer;
+                    }
+                  });
+                  Toast.fire({
+                    icon: "success",
+                    title: "Inicio de sesion correcto"
+                  });
+
                 })
               },
               //Error en el metodo OAuth

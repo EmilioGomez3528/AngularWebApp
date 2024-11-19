@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent },
   { path: 'orphanUsers', component: OrphanUsersComponent },
-  { path: 'userDetails/:id', component: UserDetailsComponent },
-  { path: 'addUsers/:id', component: AddUsersComponent },
+  { path: 'userDetails/:id', component: UserDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'addUsers/:id', component: AddUsersComponent , canActivate: [AuthGuard]},
   { path: 'authLoader', component: AuthLoaderComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];

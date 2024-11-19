@@ -45,9 +45,9 @@ export class ProfileComponent {
       (response) => {
         this.isSubmitting = false;
 
-        // Actualizamos los valores de validación usando las claves correctas
-        this.emailTaken = response.isEmailTaken; // Cambiado a camelCase
-        this.usernameTaken = response.isUserNameTaken; // Cambiado a camelCase
+        // Actualizar los valores de validación usando las claves correctas
+        this.emailTaken = response.isEmailTaken; //Comparacion entre valores
+        this.usernameTaken = response.isUserNameTaken;
 
         if (!this.emailTaken && !this.usernameTaken) {
           this.onSubmit(); // Si no hay conflictos, enviar los datos
@@ -56,7 +56,6 @@ export class ProfileComponent {
       (error) => {
         this.isSubmitting = false;
         console.error(error);
-        // Manejar error si ocurre
       }
     );
   }
@@ -65,10 +64,11 @@ export class ProfileComponent {
   onSubmit() {
     this.userData = { ...this.editData };
     this.isEditMode = false;
-
+    //llamada al metodo para actualizar los datos del usuario
     this.userService.updateProfileUser(this.userData.userId, this.editData.firstName, this.editData.lastName, this.editData.email, this.editData.username).subscribe(
       (response) => {
         console.log(response);
+        //Alerta
         Swal.fire({
           title: 'Datos actualizados',
           text: 'Datos de usuario actualizados, para ver los cambios cierra sesión!',
@@ -83,7 +83,7 @@ export class ProfileComponent {
             sessionStorage.removeItem('userId');
             this.googleService.logOutGoogle();
           }
-        });
+        });//Fin de alerta
       },
       (error) => {
         console.error(error);
